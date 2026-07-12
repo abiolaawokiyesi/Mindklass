@@ -16,7 +16,8 @@ import {
   Receipt, FileCheck, FileUp, TrendingDown, Smile, Frown, Megaphone,
   Baby, Sparkles, BookOpenCheck, DownloadCloud, Trash2,
   Hourglass, ChevronLeft, ListChecks
-, Inbox , Info , Landmark, Settings, ShieldCheck, VideoOff, Brain, Presentation, Search, Ban, Shapes } from "lucide-react";
+, Inbox , Info , Landmark, Settings, ShieldCheck, VideoOff, Brain, Presentation, Search, Ban, Shapes
+, Layers, ChevronUp, ChevronDown, Save } from "lucide-react";
 
 const mkT = d => ({
   bg: d?"#0d1117":"#f0f5ff", card: d?"#161b27":"#ffffff",
@@ -751,6 +752,12 @@ const SOC_MATERIALS=[
 ];
 
 const TRAIN_ICONS={Target,BookOpen,PenLine,Video,ClipboardCheck,Lightbulb,FlaskConical,Users,Shield,Sparkles};
+// Valid `art` keys accepted by the <TrainArt kind=.../> illustration component
+// further down this file — used by the admin Course Builder to restrict the
+// "art" dropdown to values that will actually render (anything else silently
+// falls back to art.target inside TrainArt, which is safe but not what an
+// author picked).
+const TRAIN_ART_KEYS=["command","build","weigh","society","science","data","interpret","sample","ethics","culture","roles","social","agency","control","law","identity","global","layers","chance","gap","help","migrate","planet","family","marriage","home","school","achieve","crime","measure","theory","punish","target","steps","chart","mark","search","write","match","read","talk","listen","scale"];
 
 // === Sociology Exam Technique Teacher's Course (0495EX) ===
 const SOCEX_MATERIALS=[
@@ -2961,7 +2968,14 @@ const IELTS_Q=[
 {ao:"Next Steps",q:"When retaking IELTS after an unsuccessful first attempt, the most effective approach is to...",o:["Repeat exactly the same general preparation as before","Review the previous result skill-by-skill and specifically target the weakest one","Switch immediately to General Training regardless of the actual requirement","Avoid reviewing the previous result at all"],a:1},
 ];
 
-const TRAININGS={
+// Renamed to *_BASE: these are the built-in, hardcoded courses shipped with the
+// app. Inside the main component below, a same-named local `const TRAININGS`/
+// `const SJOURNEYS` merges these with any admin-authored courses published
+// from the in-app Course Builder (stored in Supabase) — that local const
+// shadows this module-level one for the rest of the component, so every
+// existing lookup (TRAININGS[code], SJOURNEYS[code], Object.entries(...))
+// automatically includes Course-Builder courses with zero other changes.
+const TRAININGS_BASE={
  "0510":{
   code:"0510", cat:"Cambridge", subject:"English as a Second Language",
   title:"Mastering Cambridge IGCSE English as a Second Language (0510)",
@@ -6490,7 +6504,7 @@ const MH_Q=[
 ];
 
 
-const SJOURNEYS={
+const SJOURNEYS_BASE={
  "SOC10T1":{code:"0495",subject:"Sociology",group:"Sociology (0495)",cat:"Cambridge",year:"Year 10",term:1,termLabel:"1st Term",
    title:"Sociology Year 10 \u00B7 Term 1: Research Methods",
    tagline:"How sociologists study society \u2014 approaches, data, design, sampling and ethics.",
@@ -7301,6 +7315,16 @@ export default function MindKlass(){
   const [newPush,setNewPush]=useState({title:"",body:"",type:"announcement",audience:"all",urgent:false});
   const [copied,setCopied]=useState(false);
 
+  // ── Admin Course Builder (admin-authored courses, stored in Supabase "courses" table) ──
+  const [dbCourses,setDbCourses]=useState([]);          // raw rows from public.courses
+  const [cbSection,setCbSection]=useState("trainings"); // trainings | sjourneys | general
+  const [cbView,setCbView]=useState("list");            // list | edit
+  const [cbDraft,setCbDraft]=useState(null);            // course object being created/edited (app shape)
+  const [cbEditId,setCbEditId]=useState(null);          // db row id being edited, or null = creating new
+  const [cbStep,setCbStep]=useState("meta");            // meta | units | questions
+  const [cbUnitIdx,setCbUnitIdx]=useState(null);        // index into cbDraft.units open for editing, or null = unit list
+  const [cbBusy,setCbBusy]=useState(false);
+
   const chatEnd=useRef(null);
   const timerRef=useRef(null);
   const mainScrollRef=useRef(null); // scrollable content pane inside ML() — reset on page/tab change
@@ -7373,6 +7397,23 @@ export default function MindKlass(){
     else if(tab==="training"&&trView==="assess"&&trAStarted&&trATime===0){submitTrainingAssessment();}
     return()=>{clearTimeout(trTimerRef.current);clearTimeout(sjTimerRef.current);};
   },[trATime,tab,trView,trAStarted]);
+  // ── Merge admin-authored (Supabase) published courses into the built-in catalogues ──
+  // Maps a public.courses DB row (snake_case) to the same shape TRAININGS_BASE /
+  // SJOURNEYS_BASE entries already use, so the rest of the app can't tell the
+  // difference. Keyed by the row's uuid (not its human "code"), so there's no
+  // possibility of colliding with a hardcoded course key.
+  const dbRowToCourse=r=>({
+    code:r.code, cat:r.cat, subject:r.subject, group:r.group_name,
+    year:r.year, term:r.term, termLabel:r.term_label,
+    title:r.title, tagline:r.tagline,
+    durationLabel:r.duration_label, weeks:r.weeks, months:r.months,
+    passMark:r.pass_mark, totalQuestions:r.total_questions, examMins:r.exam_mins,
+    materials:[], units:r.units||[], questions:r.questions||[],
+    _dbId:r.id, _dbStatus:r.status,
+  });
+  const TRAININGS={...TRAININGS_BASE, ...Object.fromEntries(dbCourses.filter(r=>r.system==="trainings"&&r.status==="published").map(r=>[r.id,dbRowToCourse(r)]))};
+  const SJOURNEYS={...SJOURNEYS_BASE, ...Object.fromEntries(dbCourses.filter(r=>r.system==="sjourneys"&&r.status==="published").map(r=>[r.id,dbRowToCourse(r)]))};
+
   // ============ ExamGuard: assessment security / proctoring ============
   // An exam is active whenever a student or teacher assessment is in progress.
   const examActive=(tab==="learn"&&sjView==="assess"&&sjAStarted)||(tab==="training"&&trView==="assess"&&trAStarted);
@@ -7885,7 +7926,7 @@ export default function MindKlass(){
     })));
   };
 
-  const loadAllApps=async()=>{await Promise.all([loadAccessApps(),loadExamApps(),loadExamSchedule(),loadProgress(),loadSubmissions(),loadReferrals(),loadGrades(),loadClasses(),loadAttendance(),loadCommunityMessages(),loadDMs(),loadFees(),loadMeetings(),loadAssignments(),loadHomeworkSubs(),loadBehavior(),loadNotifs()]);};
+  const loadAllApps=async()=>{await Promise.all([loadAccessApps(),loadExamApps(),loadExamSchedule(),loadProgress(),loadSubmissions(),loadReferrals(),loadGrades(),loadClasses(),loadAttendance(),loadCommunityMessages(),loadDMs(),loadFees(),loadMeetings(),loadAssignments(),loadHomeworkSubs(),loadBehavior(),loadNotifs(),loadDbCourses()]);};
 
   const examMyApp=(kind,cc)=>examApps.find(a=>a.kind===kind&&a.course===cc&&a.userId===user?.id);
   const examApply=async(kind,cc)=>{
@@ -8166,6 +8207,56 @@ export default function MindKlass(){
     if(error){alert("Couldn't create the fee: "+error.message);return;}
     await loadFees();
   };
+
+  // ---- Course Builder: admin-authored courses (public.courses) ----
+  const loadDbCourses=async()=>{
+    const {data,error}=await supabase.from("courses").select("*").order("created_at",{ascending:false});
+    if(error){console.error("loadDbCourses:",error.message);return;}
+    setDbCourses(data||[]);
+  };
+  // App-shape course draft -> DB row (snake_case) for insert/update.
+  const cbDraftToRow=(d)=>({
+    system:d.system, code:d.code.trim(), cat:d.cat, subject:d.subject.trim(),
+    group_name:(d.group||"").trim()||d.subject.trim(),
+    year:d.year||null, term:d.term?Number(d.term):null, term_label:d.termLabel||null,
+    title:d.title.trim(), tagline:(d.tagline||"").trim(),
+    duration_label:d.durationLabel||null, weeks:d.weeks?Number(d.weeks):null, months:d.months||null,
+    pass_mark:Number(d.passMark)||75, total_questions:Number(d.totalQuestions)||100, exam_mins:Number(d.examMins)||60,
+    units:d.units||[], questions:d.questions||[], status:d.status||"draft",
+  });
+  const saveDbCourse=async(draft,editId)=>{
+    if(!draft.code?.trim()||!draft.title?.trim()||!draft.subject?.trim()){alert("Please fill in at least Code, Subject and Title before saving.");return false;}
+    setCbBusy(true);
+    const row=cbDraftToRow(draft);
+    const {error}=editId
+      ? await supabase.from("courses").update(row).eq("id",editId)
+      : await supabase.from("courses").insert(row);
+    setCbBusy(false);
+    if(error){alert("Couldn't save the course: "+error.message);return false;}
+    await loadDbCourses();
+    return true;
+  };
+  const publishDbCourse=async(id,publish)=>{
+    const {error}=await supabase.from("courses").update({status:publish?"published":"draft"}).eq("id",id);
+    if(error){alert("Couldn't update the course status: "+error.message);return;}
+    await loadDbCourses();
+  };
+  const deleteDbCourse=async(id)=>{
+    if(!confirm("Delete this course permanently? Students/teachers currently enrolled will lose access. This cannot be undone.")) return;
+    const {error}=await supabase.from("courses").delete().eq("id",id);
+    if(error){alert("Couldn't delete the course: "+error.message);return;}
+    await loadDbCourses();
+  };
+  const emptyCourseDraft=(system,cat)=>({
+    system, code:"", cat, subject:"", group:"",
+    year:system==="sjourneys"?"All years":"", term:1, termLabel:system==="sjourneys"?"":undefined,
+    title:"", tagline:"", durationLabel:"", weeks:"", months:"",
+    passMark:75, totalQuestions:100, examMins:60,
+    units:[], questions:[], status:"draft",
+  });
+  const emptyUnitDraft=(n)=>({id:`u_${Date.now()}_${Math.random().toString(36).slice(2,7)}`,n,title:"",mins:60,icon:"BookOpen",summary:"",keyWords:[],sections:[],activity:"",check:[{q:"",o:["","","",""],a:0},{q:"",o:["","","",""],a:0},{q:"",o:["","","",""],a:0}]});
+  const emptySectionDraft=()=>({art:"target",h:"",p:[""],ex:{t:"",b:[""]}});
+  const emptyQuestionDraft=()=>({ao:"",q:"",o:["","","",""],a:0});
   // Start a real Paystack payment by opening the hosted payment page.
   const payFee=(feeId,method)=>{
     const fee=fees.find(f=>f.id===feeId); if(!fee) return;
@@ -8233,7 +8324,7 @@ export default function MindKlass(){
   const NAV={
     student:[{id:"home",I:Home,l:"Home"},{id:"courses",I:BookOpen,l:"My Courses"},{id:"learn",I:GraduationCap,l:"Subjects"},{id:"assignments",I:ClipboardCheck,l:"Assignments"},{id:"games",I:Gamepad2,l:"Game Hub"},{id:"quiz",I:FileText,l:"Assessments"},{id:"gradebook",I:BarChart2,l:"My Grades"},{id:"community",I:MessageSquare,l:"Community"},{id:"messages",I:Mail,l:"Messages"},{id:"meetings",I:Video,l:"Virtual Class"},{id:"whiteboard",I:PenLine,l:"Whiteboard"},{id:"downloads",I:DownloadCloud,l:"Offline Library"},{id:"refer",I:Share2,l:"Refer & Earn"},{id:"profile",I:User,l:"Profile"}],
     teacher:[{id:"home",I:Home,l:"Home"},{id:"courses",I:ClipboardList,l:"My Classes"},{id:"training",I:GraduationCap,l:"Teacher's Course"},{id:"learn",I:BookMarked,l:"Student Subjects"},{id:"assignments",I:ClipboardCheck,l:"Assignments"},{id:"attendance",I:CalendarCheck,l:"Attendance"},{id:"gradebook",I:BarChart2,l:"Gradebook"},{id:"behavior",I:Heart,l:"Behavior"},{id:"games",I:Gamepad2,l:"Game Hub"},{id:"quiz",I:FileText,l:"Assessments"},{id:"community",I:MessageSquare,l:"Community"},{id:"messages",I:Mail,l:"Messages"},{id:"meetings",I:Video,l:"Schedule"},{id:"whiteboard",I:PenLine,l:"Whiteboard"},{id:"refer",I:Share2,l:"Refer & Earn"},{id:"profile",I:User,l:"Profile"}],
-    admin:[{id:"home",I:LayoutDashboard,l:"Dashboard"},{id:"users",I:Users,l:"Users"},{id:"approvals",I:ShieldCheck,l:"Course Approvals"},{id:"exams",I:BarChart2,l:"Assessments"},{id:"training",I:GraduationCap,l:"Teacher's Course"},{id:"learn",I:BookMarked,l:"Student Subjects"},{id:"attendance",I:CalendarCheck,l:"Attendance"},{id:"fees",I:CreditCard,l:"Fees & Billing"},{id:"push",I:BellRing,l:"Send Alerts"},{id:"games",I:Gamepad2,l:"Game Hub"},{id:"meetings",I:Video,l:"Meetings"},{id:"community",I:MessageSquare,l:"Community"},{id:"whiteboard",I:PenLine,l:"Whiteboard"},{id:"profile",I:User,l:"Profile"}],
+    admin:[{id:"home",I:LayoutDashboard,l:"Dashboard"},{id:"users",I:Users,l:"Users"},{id:"approvals",I:ShieldCheck,l:"Course Approvals"},{id:"coursebuilder",I:Layers,l:"Course Builder"},{id:"exams",I:BarChart2,l:"Assessments"},{id:"training",I:GraduationCap,l:"Teacher's Course"},{id:"learn",I:BookMarked,l:"Student Subjects"},{id:"attendance",I:CalendarCheck,l:"Attendance"},{id:"fees",I:CreditCard,l:"Fees & Billing"},{id:"push",I:BellRing,l:"Send Alerts"},{id:"games",I:Gamepad2,l:"Game Hub"},{id:"meetings",I:Video,l:"Meetings"},{id:"community",I:MessageSquare,l:"Community"},{id:"whiteboard",I:PenLine,l:"Whiteboard"},{id:"profile",I:User,l:"Profile"}],
     parent:[{id:"home",I:Home,l:"Home"},{id:"child",I:Baby,l:"My Child"},{id:"assignments",I:ClipboardCheck,l:"Homework"},{id:"gradebook",I:BarChart2,l:"Report Card"},{id:"behavior",I:Heart,l:"Behavior"},{id:"attendance",I:CalendarCheck,l:"Attendance"},{id:"fees",I:CreditCard,l:"Pay Fees"},{id:"messages",I:Mail,l:"Messages"},{id:"profile",I:User,l:"Profile"}],
   };
   const nav=NAV[effRole]||[];
@@ -8246,6 +8337,7 @@ export default function MindKlass(){
     if(id==="learn"){setSjView("home");setSjCourse(null);setSjUnit(null);setSjAStarted(false);}
     if(id==="training"){setTrView("home");setTrCourse(null);setTrUnit(null);setTrAStarted(false);}
     if(id==="courses") setSL(null);
+    if(id==="coursebuilder"){setCbView("list");setCbDraft(null);setCbEditId(null);setCbStep("meta");setCbUnitIdx(null);}
     setTab(id);
   };
 
@@ -9687,6 +9779,270 @@ export default function MindKlass(){
           {[{name:"Mathematics",sub:"0580",n:12,date:"2026-06-20",avg:78},{name:"Biology",sub:"0610",n:8,date:"2026-06-25",avg:null}].map((a,i)=>{const AI=SI[a.sub]||FileText;return <div key={i} style={{padding:"10px 12px",borderRadius:10,background:T.alt,marginBottom:7,display:"flex",gap:8,alignItems:"center"}}><AI size={16} color="#1842a8"/><div style={{flex:1}}><div style={{fontSize:12,fontWeight:800,color:T.head}}>{a.name} - {a.sub}</div><div style={{fontSize:10,color:T.muted,display:"flex",gap:5,alignItems:"center",marginTop:1}}><Users size={9}/>{a.n} students<Calendar size={9}/>{a.date}</div>{a.avg&&<div style={{fontSize:10,fontWeight:700,color:"#059669",marginTop:2,display:"flex",alignItems:"center",gap:3}}><CheckCircle size={10}/>Avg: {a.avg}%</div>}</div></div>;})}
         </div>
       </div>
+    </>});
+  }
+
+
+  // ════════════════════════════════════════════════════════════════════════════
+  //  ADMIN COURSE BUILDER — create, edit and publish full courses from inside
+  //  the app itself (no code changes, no redeploy). Backed by the Supabase
+  //  "courses" table; published rows are merged into TRAININGS/SJOURNEYS above,
+  //  so everything downstream (course cards, unit reader, exam flow, results,
+  //  certificates) treats a Course-Builder course exactly like a built-in one.
+  // ════════════════════════════════════════════════════════════════════════════
+  if(tab==="coursebuilder"&&effRole==="admin"){
+    const CB_SECTIONS=[
+      {key:"trainings",label:"Teacher's Course",I:GraduationCap,system:"trainings",fixedCat:null},
+      {key:"sjourneys",label:"Student Subjects",I:BookMarked,system:"sjourneys",fixedCat:null},
+      {key:"general",label:"General Courses",I:Layers,system:"sjourneys",fixedCat:"General Courses"},
+    ];
+    const curSec=CB_SECTIONS.find(s=>s.key===cbSection)||CB_SECTIONS[0];
+    const secCourses=dbCourses.filter(r=>{
+      if(curSec.key==="trainings") return r.system==="trainings";
+      if(curSec.key==="general") return r.system==="sjourneys"&&r.cat==="General Courses";
+      return r.system==="sjourneys"&&r.cat!=="General Courses";
+    });
+    const catOptions=SUBJECT_CATS.filter(c=>c!=="All"&&c!=="General Courses");
+
+    const startNewCourse=()=>{
+      setCbDraft(emptyCourseDraft(curSec.system,curSec.fixedCat||catOptions[0]));
+      setCbEditId(null);setCbStep("meta");setCbUnitIdx(null);setCbView("edit");
+    };
+    const startEditCourse=(row)=>{
+      setCbDraft({...dbRowToCourse(row),status:row.status});
+      setCbEditId(row.id);setCbStep("meta");setCbUnitIdx(null);setCbView("edit");
+    };
+    const moveUnitG=(i,dir)=>{
+      setCbDraft(p=>{
+        const units=[...p.units];const ni=i+dir;if(ni<0||ni>=units.length)return p;
+        [units[i],units[ni]]=[units[ni],units[i]];
+        return {...p,units:units.map((u,idx)=>({...u,n:idx+1}))};
+      });
+    };
+    const removeUnitG=(i)=>{
+      if(!confirm("Remove this unit? This cannot be undone."))return;
+      setCbDraft(p=>({...p,units:p.units.filter((_,idx)=>idx!==i).map((u,idx)=>({...u,n:idx+1}))}));
+    };
+
+    // ---------- LIST VIEW ----------
+    if(cbView==="list"){
+      return ML({children:<>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:15,flexWrap:"wrap",gap:8}}>
+          <h1 style={{fontSize:19,fontWeight:900,fontFamily:"Outfit,sans-serif",color:T.head,margin:0,display:"flex",alignItems:"center",gap:7}}><Layers size={19} color="#1842a8"/>Course Builder</h1>
+          <button onClick={startNewCourse} style={bP}><Plus size={12} style={{marginRight:4,verticalAlign:"middle"}}/>New Course</button>
+        </div>
+        <div style={{...card,marginBottom:16,background:T.alt,display:"flex",gap:9,alignItems:"flex-start"}}>
+          <Info size={15} color="#1842a8" style={{flexShrink:0,marginTop:1}}/>
+          <p style={{fontSize:12,color:T.txt,margin:0,lineHeight:1.6}}>Build full courses right here — no code, no redeploy. A course stays a <strong>Draft</strong> (visible only here) until you hit <strong>Publish</strong>, after which it appears on {curSec.key==="trainings"?"Teacher's Course":"Student Subjects"} for everyone, exactly like the built-in courses.</p>
+        </div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:7,marginBottom:18}}>
+          {CB_SECTIONS.map(s=>{const on=cbSection===s.key;return <button key={s.key} onClick={()=>setCbSection(s.key)} style={{fontSize:12,fontWeight:800,padding:"7px 14px",borderRadius:99,cursor:"pointer",border:on?"1.5px solid #1842a8":`1.5px solid ${T.bd}`,background:on?"#1842a8":T.card,color:on?"#fff":T.txt,display:"inline-flex",alignItems:"center",gap:6}}><s.I size={13}/>{s.label}</button>;})}
+        </div>
+        {secCourses.length===0
+          ? <div style={{...card,textAlign:"center",padding:"34px 18px",borderStyle:"dashed"}}><Layers size={26} color={T.muted} style={{marginBottom:8}}/><p style={{fontSize:14,fontWeight:800,color:T.head,margin:"0 0 4px"}}>No {curSec.label} courses yet</p><p style={{fontSize:12,color:T.muted,margin:0}}>Click "New Course" above to build your first one.</p></div>
+          : <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"repeat(auto-fill,minmax(300px,1fr))",gap:12}}>
+              {secCourses.map(row=>{
+                const qCount=(row.questions||[]).length,uCount=(row.units||[]).length;
+                const pub=row.status==="published";
+                return <div key={row.id} style={{...card,display:"flex",flexDirection:"column",gap:9,borderTop:`4px solid ${pub?"#059669":"#d97706"}`}}>
+                  <div>
+                    <div style={{display:"flex",alignItems:"center",gap:7,marginBottom:6}}>
+                      <span style={{fontSize:10,fontWeight:800,color:pub?"#059669":"#b45309",background:pub?"#dcfce7":"#fffbeb",padding:"3px 9px",borderRadius:99}}>{pub?"Published":"Draft"}</span>
+                      <span style={{fontSize:10,fontWeight:700,color:T.muted}}>{row.code}</span>
+                    </div>
+                    <h3 style={{fontSize:15,fontWeight:900,fontFamily:"Outfit,sans-serif",color:T.head,margin:"0 0 5px",lineHeight:1.3}}>{row.title||"(untitled course)"}</h3>
+                    <p style={{fontSize:12,color:T.muted,margin:0,lineHeight:1.55}}>{row.tagline}</p>
+                  </div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:5}}>
+                    {[{I:ListChecks,l:`${uCount} unit${uCount===1?"":"s"}`},{I:FileText,l:`${qCount}/${row.total_questions} Q`},{I:Award,l:`${row.pass_mark}% to pass`},{I:Clock,l:`${row.exam_mins} min exam`}].map((chip,ci)=>(
+                      <span key={ci} style={{display:"inline-flex",alignItems:"center",gap:4,fontSize:10.5,fontWeight:700,color:T.txt,background:T.alt,padding:"4px 9px",borderRadius:8}}><chip.I size={11} color="#1842a8"/>{chip.l}</span>
+                    ))}
+                  </div>
+                  <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                    <button onClick={()=>startEditCourse(row)} style={{...bO,flex:1,padding:"8px",fontSize:11.5}}><Edit2 size={11} style={{marginRight:3,verticalAlign:"middle"}}/>Edit</button>
+                    <button onClick={()=>publishDbCourse(row.id,!pub)} style={{...bO,flex:1,padding:"8px",fontSize:11.5,color:pub?"#b45309":"#059669",borderColor:pub?"#fed7aa":"#86efac"}}>{pub?<><EyeOff size={11} style={{marginRight:3,verticalAlign:"middle"}}/>Unpublish</>:<><Eye size={11} style={{marginRight:3,verticalAlign:"middle"}}/>Publish</>}</button>
+                    <button onClick={()=>deleteDbCourse(row.id)} style={{...bO,padding:"8px 10px",fontSize:11.5,color:"#dc2626",borderColor:"#fecaca"}}><Trash2 size={12}/></button>
+                  </div>
+                </div>;
+              })}
+            </div>}
+      </>});
+    }
+
+    // ---------- EDIT VIEW ----------
+    const d=cbDraft;
+    if(!d){setCbView("list");return null;}
+    const STEPS=[{key:"meta",l:"Course Details"},{key:"units",l:`Units (${(d.units||[]).length})`},{key:"questions",l:`Exam Questions (${(d.questions||[]).length}/${d.totalQuestions||100})`}];
+
+    return ML({children:<>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14,flexWrap:"wrap",gap:8}}>
+        <button onClick={()=>{setCbView("list");setCbDraft(null);setCbEditId(null);}} style={{...bO,padding:"8px 14px",fontSize:12}}><ArrowLeft size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Back to list</button>
+        <div style={{display:"flex",gap:7}}>
+          <button disabled={cbBusy} onClick={async()=>{if(await saveDbCourse({...d,status:"draft"},cbEditId))setCbView("list");}} style={{...bO,padding:"9px 16px",fontSize:12,opacity:cbBusy?.6:1}}><Save size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Save Draft</button>
+          <button disabled={cbBusy} onClick={async()=>{if(await saveDbCourse({...d,status:"published"},cbEditId))setCbView("list");}} style={{...bP,padding:"9px 16px",fontSize:12,opacity:cbBusy?.6:1}}><Eye size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Save &amp; Publish</button>
+        </div>
+      </div>
+      <h1 style={{fontSize:19,fontWeight:900,fontFamily:"Outfit,sans-serif",color:T.head,margin:"0 0 14px",display:"flex",alignItems:"center",gap:7}}><Layers size={19} color="#1842a8"/>{cbEditId?"Edit Course":"New Course"} — {curSec.label}</h1>
+      <div style={{display:"flex",gap:5,marginBottom:16,flexWrap:"wrap"}}>
+        {STEPS.map(s=>{const on=cbStep===s.key;return <button key={s.key} onClick={()=>{setCbStep(s.key);setCbUnitIdx(null);}} style={{flex:isMobile?"1 1 100%":1,padding:"9px 6px",borderRadius:10,border:"none",cursor:"pointer",fontSize:11.5,fontWeight:800,background:on?"#1842a8":T.alt,color:on?"#fff":T.txt}}>{s.l}</button>;})}
+      </div>
+
+      {cbStep==="meta"&&<div style={card}>
+        <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:"0 14px"}}>
+          <div style={{marginBottom:12}}><label style={lbl}>Course Code *</label><input placeholder="e.g. MH2, PSYCH101" value={d.code} onChange={e=>setCbDraft({...d,code:e.target.value})} style={inp}/></div>
+          <div style={{marginBottom:12}}><label style={lbl}>Subject *</label><input placeholder="e.g. Psychology" value={d.subject} onChange={e=>setCbDraft({...d,subject:e.target.value})} style={inp}/></div>
+          {!curSec.fixedCat&&<div style={{marginBottom:12}}><label style={lbl}>Category</label><select value={d.cat} onChange={e=>setCbDraft({...d,cat:e.target.value})} style={inp}>{catOptions.map(c=><option key={c}>{c}</option>)}</select></div>}
+          {curSec.system==="sjourneys"&&<div style={{marginBottom:12}}><label style={lbl}>Group Label (heading shown above the course card)</label><input placeholder="Defaults to Subject if left blank" value={d.group} onChange={e=>setCbDraft({...d,group:e.target.value})} style={inp}/></div>}
+        </div>
+        <div style={{marginBottom:12}}><label style={lbl}>Title *</label><input placeholder="e.g. Introduction to Psychology" value={d.title} onChange={e=>setCbDraft({...d,title:e.target.value})} style={inp}/></div>
+        <div style={{marginBottom:12}}><label style={lbl}>Tagline</label><textarea rows={2} placeholder="One-sentence hook shown on the course card" value={d.tagline} onChange={e=>setCbDraft({...d,tagline:e.target.value})} style={{...inp,resize:"vertical"}}/></div>
+
+        {curSec.system==="trainings"
+          ? <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:"0 14px"}}>
+              <div style={{marginBottom:12}}><label style={lbl}>Weeks</label><input type="number" value={d.weeks} onChange={e=>setCbDraft({...d,weeks:e.target.value})} style={inp}/></div>
+              <div style={{marginBottom:12}}><label style={lbl}>Duration Label</label><input placeholder="e.g. 10-week pathway · one module per week" value={d.durationLabel} onChange={e=>setCbDraft({...d,durationLabel:e.target.value})} style={inp}/></div>
+            </div>
+          : <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr 1fr",gap:"0 14px"}}>
+              <div style={{marginBottom:12}}><label style={lbl}>Duration (shown as "months")</label><input placeholder="e.g. about 18 weeks" value={d.months} onChange={e=>setCbDraft({...d,months:e.target.value})} style={inp}/></div>
+              <div style={{marginBottom:12}}><label style={lbl}>Year</label><input placeholder='e.g. "Year 10" or "All years"' value={d.year} onChange={e=>setCbDraft({...d,year:e.target.value})} style={inp}/></div>
+              <div style={{marginBottom:12}}><label style={lbl}>Term Label (shown as a badge)</label><input placeholder='e.g. "1st Term" or "18-week course"' value={d.termLabel} onChange={e=>setCbDraft({...d,termLabel:e.target.value})} style={inp}/></div>
+            </div>}
+
+        <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr 1fr":"1fr 1fr 1fr",gap:"0 14px",marginTop:4}}>
+          <div style={{marginBottom:4}}><label style={lbl}>Pass Mark %</label><input type="number" value={d.passMark} onChange={e=>setCbDraft({...d,passMark:e.target.value})} style={inp}/></div>
+          <div style={{marginBottom:4}}><label style={lbl}>Total Questions</label><input type="number" value={d.totalQuestions} onChange={e=>setCbDraft({...d,totalQuestions:e.target.value})} style={inp}/></div>
+          <div style={{marginBottom:4}}><label style={lbl}>Exam Minutes</label><input type="number" value={d.examMins} onChange={e=>setCbDraft({...d,examMins:e.target.value})} style={inp}/></div>
+        </div>
+        <p style={{fontSize:10.5,color:T.muted,marginTop:8,marginBottom:0}}>Every existing MindKlass course uses <strong>75% pass mark, 100 questions, a 60-minute exam</strong> — keep these unless you have a specific reason to differ.</p>
+      </div>}
+
+      {cbStep==="units"&&cbUnitIdx===null&&<div>
+        <button onClick={()=>{const ni=(d.units||[]).length;setCbDraft({...d,units:[...(d.units||[]),emptyUnitDraft(ni+1)]});setCbUnitIdx(ni);}} style={{...bP,marginBottom:14}}><Plus size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Add Unit</button>
+        {(d.units||[]).length===0
+          ? <div style={{...card,textAlign:"center",padding:"28px",borderStyle:"dashed"}}><p style={{fontSize:12,color:T.muted,margin:0}}>No units yet. Add your first one above.</p></div>
+          : <div style={{display:"flex",flexDirection:"column",gap:8}}>
+              {d.units.map((u,i)=>{const Icon=TRAIN_ICONS[u.icon]||BookOpen;return <div key={u.id} style={{...card,display:"flex",alignItems:"center",gap:10,padding:14,flexWrap:"wrap"}}>
+                <div style={{width:34,height:34,borderRadius:9,background:T.alt,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Icon size={16} color="#1842a8"/></div>
+                <div style={{flex:1,minWidth:160}}>
+                  <div style={{fontSize:13,fontWeight:800,color:T.head}}>Module {u.n}: {u.title||"(untitled)"}</div>
+                  <div style={{fontSize:10.5,color:T.muted}}>{u.mins} min · {(u.sections||[]).length} section{(u.sections||[]).length===1?"":"s"} · {(u.check||[]).length} check question{(u.check||[]).length===1?"":"s"}</div>
+                </div>
+                <div style={{display:"flex",gap:4,flexShrink:0}}>
+                  <button onClick={()=>moveUnitG(i,-1)} disabled={i===0} style={{...bO,padding:"6px 8px",fontSize:10,opacity:i===0?.4:1}}><ChevronUp size={12}/></button>
+                  <button onClick={()=>moveUnitG(i,1)} disabled={i===d.units.length-1} style={{...bO,padding:"6px 8px",fontSize:10,opacity:i===d.units.length-1?.4:1}}><ChevronDown size={12}/></button>
+                  <button onClick={()=>setCbUnitIdx(i)} style={{...bO,padding:"6px 10px",fontSize:11}}><Edit2 size={11}/></button>
+                  <button onClick={()=>removeUnitG(i)} style={{...bO,padding:"6px 10px",fontSize:11,color:"#dc2626",borderColor:"#fecaca"}}><Trash2 size={11}/></button>
+                </div>
+              </div>;})}
+            </div>}
+      </div>}
+
+      {cbStep==="units"&&cbUnitIdx!==null&&(()=>{
+        const u=d.units[cbUnitIdx];
+        if(!u){setCbUnitIdx(null);return null;}
+        const setU=(patch)=>setCbDraft(p=>{const units=[...p.units];units[cbUnitIdx]={...units[cbUnitIdx],...patch};return {...p,units};});
+        return <div>
+          <button onClick={()=>setCbUnitIdx(null)} style={{...bO,padding:"7px 12px",fontSize:11.5,marginBottom:12}}><ArrowLeft size={11} style={{marginRight:3,verticalAlign:"middle"}}/>Back to unit list</button>
+          <div style={card}>
+            <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"2fr 1fr 1fr",gap:"0 12px"}}>
+              <div style={{marginBottom:10}}><label style={lbl}>Unit Title *</label><input value={u.title} onChange={e=>setU({title:e.target.value})} style={inp}/></div>
+              <div style={{marginBottom:10}}><label style={lbl}>Minutes</label><input type="number" value={u.mins} onChange={e=>setU({mins:e.target.value})} style={inp}/></div>
+              <div style={{marginBottom:10}}><label style={lbl}>Icon</label><select value={u.icon} onChange={e=>setU({icon:e.target.value})} style={inp}>{Object.keys(TRAIN_ICONS).map(k=><option key={k}>{k}</option>)}</select></div>
+            </div>
+            <div style={{marginBottom:10}}><label style={lbl}>Summary</label><textarea rows={2} value={u.summary} onChange={e=>setU({summary:e.target.value})} style={{...inp,resize:"vertical"}}/></div>
+            <div style={{marginBottom:2}}><label style={lbl}>Key Words (comma-separated)</label><input value={(u.keyWords||[]).join(", ")} onChange={e=>setU({keyWords:e.target.value.split(",").map(s=>s.trim()).filter(Boolean)})} style={inp}/></div>
+          </div>
+
+          <h3 style={{fontSize:13,fontWeight:800,color:T.head,margin:"16px 0 10px"}}>Lesson Sections</h3>
+          {(u.sections||[]).map((s,si)=>{
+            const setS=(patch)=>setU({sections:u.sections.map((x,i)=>i===si?{...x,...patch}:x)});
+            return <div key={si} style={{...card,marginBottom:10}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:9}}>
+                <span style={{fontSize:11.5,fontWeight:800,color:T.head}}>Section {si+1}</span>
+                <button onClick={()=>setU({sections:u.sections.filter((_,i)=>i!==si)})} style={{...bO,padding:"5px 9px",fontSize:10,color:"#dc2626",borderColor:"#fecaca"}}><Trash2 size={10}/></button>
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 2fr",gap:"0 12px"}}>
+                <div style={{marginBottom:9}}><label style={lbl}>Illustration</label><select value={s.art} onChange={e=>setS({art:e.target.value})} style={inp}>{TRAIN_ART_KEYS.map(k=><option key={k}>{k}</option>)}</select></div>
+                <div style={{marginBottom:9}}><label style={lbl}>Heading</label><input value={s.h} onChange={e=>setS({h:e.target.value})} style={inp}/></div>
+              </div>
+              <label style={lbl}>Paragraphs</label>
+              {(s.p||[]).map((para,pi)=>(
+                <div key={pi} style={{display:"flex",gap:6,marginBottom:6}}>
+                  <textarea rows={2} value={para} onChange={e=>setS({p:s.p.map((x,i)=>i===pi?e.target.value:x)})} style={{...inp,resize:"vertical",flex:1}}/>
+                  <button onClick={()=>setS({p:s.p.filter((_,i)=>i!==pi)})} style={{...bO,padding:"6px 9px",fontSize:10,color:"#dc2626",borderColor:"#fecaca",alignSelf:"flex-start"}}><X size={10}/></button>
+                </div>
+              ))}
+              <button onClick={()=>setS({p:[...(s.p||[]),""]})} style={{...bO,padding:"5px 10px",fontSize:10.5,marginBottom:10}}><Plus size={10} style={{marginRight:2,verticalAlign:"middle"}}/>Add paragraph</button>
+
+              <div style={{background:T.alt,borderRadius:10,padding:10,marginTop:6}}>
+                <label style={lbl}>Example Box — Title/Intro</label>
+                <input value={s.ex?.t||""} onChange={e=>setS({ex:{...(s.ex||{}),t:e.target.value}})} style={{...inp,marginBottom:8}}/>
+                <label style={lbl}>Example Box — Bullet Points</label>
+                {(s.ex?.b||[]).map((b,bi)=>(
+                  <div key={bi} style={{display:"flex",gap:6,marginBottom:6}}>
+                    <input value={b} onChange={e=>setS({ex:{...s.ex,b:s.ex.b.map((x,i)=>i===bi?e.target.value:x)}})} style={{...inp,flex:1}}/>
+                    <button onClick={()=>setS({ex:{...s.ex,b:s.ex.b.filter((_,i)=>i!==bi)}})} style={{...bO,padding:"6px 9px",fontSize:10,color:"#dc2626",borderColor:"#fecaca"}}><X size={10}/></button>
+                  </div>
+                ))}
+                <button onClick={()=>setS({ex:{...(s.ex||{t:""}),b:[...(s.ex?.b||[]),""]}})} style={{...bO,padding:"5px 10px",fontSize:10.5}}><Plus size={10} style={{marginRight:2,verticalAlign:"middle"}}/>Add bullet</button>
+              </div>
+            </div>;
+          })}
+          <button onClick={()=>setU({sections:[...(u.sections||[]),emptySectionDraft()]})} style={{...bP,marginBottom:16}}><Plus size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Add Section</button>
+
+          <div style={{...card,marginBottom:16}}>
+            <label style={lbl}>Activity (end-of-unit task)</label>
+            <textarea rows={2} value={u.activity} onChange={e=>setU({activity:e.target.value})} style={{...inp,resize:"vertical"}}/>
+          </div>
+
+          <h3 style={{fontSize:13,fontWeight:800,color:T.head,margin:"0 0 10px"}}>Check-Your-Understanding Questions</h3>
+          {(u.check||[]).map((c,ci)=>{
+            const setC=(patch)=>setU({check:u.check.map((x,i)=>i===ci?{...x,...patch}:x)});
+            return <div key={ci} style={{...card,marginBottom:10}}>
+              <label style={lbl}>Question {ci+1}</label>
+              <input value={c.q} onChange={e=>setC({q:e.target.value})} style={{...inp,marginBottom:8}}/>
+              <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:8}}>
+                {c.o.map((opt,oi)=>(
+                  <div key={oi} style={{display:"flex",alignItems:"center",gap:6}}>
+                    <input type="radio" checked={c.a===oi} onChange={()=>setC({a:oi})}/>
+                    <input value={opt} placeholder={`Option ${oi+1}`} onChange={e=>setC({o:c.o.map((x,i)=>i===oi?e.target.value:x)})} style={{...inp,flex:1}}/>
+                  </div>
+                ))}
+              </div>
+            </div>;
+          })}
+        </div>;
+      })()}
+
+      {cbStep==="questions"&&<div>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}>
+          <p style={{fontSize:12,color:T.muted,margin:0}}>{(d.questions||[]).length} of {d.totalQuestions||100} target questions written. Aim for genuinely challenging, exam-style questions — not simple recall.</p>
+          <button onClick={()=>setCbDraft({...d,questions:[...(d.questions||[]),emptyQuestionDraft()]})} style={bP}><Plus size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Add Question</button>
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:10}}>
+          {(d.questions||[]).map((q,qi)=>{
+            const setQ=(patch)=>setCbDraft({...d,questions:d.questions.map((x,i)=>i===qi?{...x,...patch}:x)});
+            return <div key={qi} style={{...card,padding:14}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                <span style={{fontSize:10.5,fontWeight:800,color:T.muted}}>Question {qi+1}</span>
+                <button onClick={()=>setCbDraft({...d,questions:d.questions.filter((_,i)=>i!==qi)})} style={{...bO,padding:"5px 9px",fontSize:10,color:"#dc2626",borderColor:"#fecaca"}}><Trash2 size={10}/></button>
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 2fr",gap:"0 10px"}}>
+                <div style={{marginBottom:8}}><label style={lbl}>Topic Label</label><input placeholder="e.g. Warning Signs" value={q.ao} onChange={e=>setQ({ao:e.target.value})} style={inp}/></div>
+                <div style={{marginBottom:8}}><label style={lbl}>Question</label><input value={q.q} onChange={e=>setQ({q:e.target.value})} style={inp}/></div>
+              </div>
+              <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:8}}>
+                {q.o.map((opt,oi)=>(
+                  <div key={oi} style={{display:"flex",alignItems:"center",gap:6}}>
+                    <input type="radio" checked={q.a===oi} onChange={()=>setQ({a:oi})}/>
+                    <input value={opt} placeholder={`Option ${oi+1}`} onChange={e=>setQ({o:q.o.map((x,i)=>i===oi?e.target.value:x)})} style={{...inp,flex:1}}/>
+                  </div>
+                ))}
+              </div>
+            </div>;
+          })}
+        </div>
+      </div>}
     </>});
   }
 
