@@ -7703,6 +7703,388 @@ const WA_Q=[
  {ao:"Case Studies and Projects",q:"What is the module's overall conclusion about the relationship between theory and real-world execution?",o:["Theory alone is sufficient without ever executing any project","Real-world execution is the ultimate test of theory, and systematic combination of profile, messaging and integration creates a scalable operational engine","Practical projects are optional and add no real value","Execution matters only for large enterprises, not individuals"],a:1},
 ];
 
+// ═══ SELF-AWARENESS MASTERY (8-unit General Course) ═══
+// Source: user-supplied course outline + intro case studies, cleaned of
+// citation brackets, the trailing clarifying-question block and the
+// reference-URL list. Stories kept verbatim in substance; only grammar/
+// punctuation lightly corrected. "Key Ideas" and the extra section per unit
+// are original teaching content written to cover every listed subtopic in
+// depth, per the request for a more detailed course body.
+const SA_UNITS=[
+ {id:"sa_m1",n:1,title:"Introduction to Self-Awareness",mins:120,icon:"Lightbulb",
+  summary:"What self-awareness actually is, why it matters for personal, academic and professional success, and how to begin your own self-discovery journey.",
+  keyWords:["self-awareness","blind spots","self-discovery","emotional intelligence","personal growth"],
+  sections:[
+   {art:"search",h:"The Mirror That Rescued an Executive's Legacy",p:[
+    "In 2006, Ford Motor Company was on the verge of bankruptcy, facing a staggering $12.7 billion loss. The corporate culture was toxic — executives routinely hid mistakes and masked flaws out of fear of getting fired. When new CEO Alan Mulally stepped in, he realised the company was blind to its own reality. The leaders lacked basic organisational self-awareness. They were on a fast track to ruin because no one had the courage to look in the mirror and state the truth.",
+    "Mulally initiated a mandatory weekly business review where executives had to colour-code their project charts: green for good, yellow for caution, and red for problems. For the first few weeks, every single executive brought charts that were entirely green, despite the company haemorrhaging billions. Mulally stopped the meeting and looked at them with deep empathy, asking, \"We are losing billions of dollars. Is absolutely nothing going wrong?\"",
+    "One executive took a terrifying risk. Mark Fields brought a chart with a bright red indicator showing a massive mechanical issue delaying a vehicle launch. The room went silent, expecting Fields to be fired on the spot. Instead, Mulally clapped. He praised Fields for his courage and self-awareness, stating that identifying the weakness was the first step toward a cure. This moment broke the corporate curse. By modelling a journey of honest self-discovery, Mulally taught his team to embrace reality, leading to one of the greatest corporate turnarounds in automotive history without a single federal bailout."
+   ],ex:{t:"Conclusion",b:[
+    "Self-awareness is not an abstract concept; it is a life-saving tool.",
+    "Recognising your current reality, vulnerabilities, and blind spots is the mandatory starting point for all meaningful personal transformation."
+   ]}},
+   {art:"steps",h:"Key Ideas in This Module",p:[
+    "Self-awareness is the honest, ongoing recognition of your own thoughts, emotions, behaviours, values and impact on others — the ability to see yourself clearly rather than through the comfortable filter of habit or ego. It has two faces: internal self-awareness (how well you understand your own inner world) and external self-awareness (how accurately you understand how others actually experience you). Most people are far stronger in one than the other, and true mastery means developing both.",
+    "Self-awareness matters because every other skill in this course — regulating emotions, setting goals, communicating well, leading others — depends on first seeing reality accurately. Ford's executives were technically brilliant, but their green-only charts show what happens when a whole culture loses the ability to see itself: small problems are hidden until they become billion-dollar catastrophes. The same pattern plays out at the personal level whenever someone avoids honest feedback about a habit, a relationship, or a weakness.",
+    "A self-discovery journey is the deliberate, structured process of gathering evidence about yourself instead of guessing. That evidence comes from several sources: reflective practices like journaling, structured tools like personality and values assessments, and — most powerfully but most uncomfortably — direct feedback from people who know you well and are willing to tell you the truth, the way Mark Fields told Mulally the truth about a red chart.",
+    "Blind spots are the parts of yourself that are obvious to others but invisible to you — and they are not a character flaw, just a universal feature of being human. Nobody can see the back of their own head without a mirror; nobody can see their own blind spots without deliberately seeking outside perspective. The goal of this module, and of the course as a whole, is to build the habit of seeking that mirror regularly instead of only in a crisis.",
+    "Self-awareness is a practice, not a one-time discovery. Mulally didn't fix Ford's culture with a single meeting — he built a weekly rhythm that made honesty the norm rather than the exception. The same principle applies to you personally: a single moment of insight fades unless it's supported by a regular habit of checking in with yourself and inviting honest input from others."
+   ]},
+   {art:"gap",h:"Spotting Your Own Blind Spots",p:[
+    "A simple, practical way to start is the Known/Unknown grid: things you know about yourself and others also know (your open self), things you know but hide from others (your hidden self), things others see but you don't (your blind spot), and things neither you nor anyone else has discovered yet (your unknown potential). Growth happens by shrinking the blind spot and the hidden self — sharing more of what you hide, and actively inviting feedback on what you can't see.",
+    "One low-cost habit is the end-of-day reflection: three short questions each evening — what went well, what didn't, and what did that reveal about me — take under five minutes but compound into real self-knowledge over months. Another is asking a trusted colleague, friend or family member one specific question periodically: \"What's one thing I do that you think I'm not fully aware of?\" — specific questions get far more useful answers than a vague \"any feedback for me?\"",
+    "Watch for the common trap of defensive listening: when someone offers you a hard truth, the instinctive reaction is to explain, justify or minimise it before you've actually absorbed it. Mulally's genius was creating psychological safety so that a red chart was met with applause, not punishment — you can create the same safety for yourself by training your first response to honest feedback to be \"thank you, tell me more\" rather than an immediate defence."
+   ]}
+  ],
+  activity:"Draw your own Known/Unknown grid. In the 'blind spot' quadrant, write down one honest question you're willing to ask a trusted person this week, then actually ask it.",
+  check:[
+   {q:"In the Ford case study, what specifically caused the executives to keep bringing 'all-green' charts despite the company losing billions?",o:["A genuine lack of any real problems","Fear of being fired for reporting bad news, which suppressed organisational self-awareness","A company policy against using red or yellow colours","A shortage of accurate financial data"],a:1},
+   {q:"What is external self-awareness, as distinguished in this module?",o:["Knowledge of external economic conditions","How accurately you understand how others actually experience you","A synonym for internal self-awareness with no real difference","A personality test score"],a:1},
+   {q:"According to this module, what is the most reliable way to discover a genuine blind spot?",o:["Guessing based on your own assumptions","Deliberately seeking honest outside feedback, since blind spots are by definition invisible to you alone","Avoiding feedback until a crisis forces it","Reading only about people you admire"],a:1},
+  ]},
+
+ {id:"sa_m2",n:2,title:"Personality and Identity",mins:120,icon:"Users",
+  summary:"Understanding personality types, clarifying your values and beliefs, and building genuine self-confidence and character around who you actually are.",
+  keyWords:["personality types","values","character development","self-confidence","identity"],
+  sections:[
+   {art:"identity",h:"The Introvert Who Rewrote the Rules of Power",p:[
+    "For years, corporate lawyer Susan Cain tried to force herself to fit into a personality type that wasn't hers. She lived in a world that praised loud, hyper-aggressive, extroverted behaviour. In law school and at her corporate firm, she felt immense pressure to speak over others, network aggressively, and hide her naturally reflective, quiet character traits. She felt like an outsider, constantly doubting her self-worth and identity.",
+    "In 2012, Susan decided to stop fighting her natural design. She embarked on a deep exploration of personality and identity, studying the scientific data behind introversion and extroversion. She realised her quietness was not a structural defect; it was her primary strength. Her deep listening skills, analytical precision, and thoughtful character development were highly valuable assets.",
+    "She poured her identity insights into a book titled Quiet: The Power of Introverts in a World That Can't Stop Talking, then stepped onto a massive global stage to deliver a historic TED Talk. Her speech went viral, reaching millions of people worldwide who felt invisible because they didn't fit standard societal profiles. By understanding her true personality type and building her core self-confidence around it, Susan transformed from a stressed, unfulfilled lawyer into a global authority on personal leadership."
+   ],ex:{t:"Conclusion",b:[
+    "Your character traits and values are the foundational pillars of your unique identity.",
+    "True self-confidence emerges when you stop mimicking the traits of others and instead master the unique internal architecture of your own personality."
+   ]}},
+   {art:"roles",h:"Key Ideas in This Module",p:[
+    "Personality type frameworks — such as introversion/extroversion, the Big Five traits, or tools like Myers-Briggs — are not boxes that limit you, but maps that describe recurring patterns in how you naturally think, recharge, and relate to others. Susan Cain's insight wasn't that introversion is 'better' than extroversion; it was that fighting your natural wiring to imitate a different type wastes energy that could instead be invested in developing your actual strengths.",
+    "Values are the deep principles that determine what you consider worth pursuing — honesty, achievement, connection, security, creativity, and so on — while beliefs are the assumptions you hold about how the world works. The two interact constantly: a person who values connection but believes 'showing vulnerability is weakness' will feel chronic internal tension until one of those two things shifts. Clarifying your values means naming, in plain language, the three or four principles you're least willing to compromise on, then checking whether your daily choices actually reflect them.",
+    "Character development is the long, deliberate process of aligning your actions with your stated values until they become habitual rather than effortful. It isn't built through a single dramatic decision, but through the accumulation of small choices — Susan Cain's character wasn't 'discovered' in one afternoon; it was built across years of quietly refusing to abandon her natural strengths despite social pressure to conform.",
+    "Self-confidence, properly understood, is not the absence of self-doubt or the appearance of loud certainty — it is a stable, internal sense of your own worth that doesn't depend on matching someone else's personality template. This is the single most important reframe in this module: confidence built on imitation is fragile because it depends on successfully pretending to be someone else, while confidence built on self-knowledge is durable because it only requires you to keep being yourself, honestly and skilfully.",
+    "Identity, finally, is the ongoing story you tell about who you are — and like any story, it can be rewritten. Susan Cain's identity shift from 'failed extrovert' to 'successful introvert' didn't change a single fact about her personality; it changed the meaning she assigned to those facts. That reframing power is available to anyone willing to examine which parts of their self-story were inherited from others' expectations rather than chosen deliberately."
+   ]},
+   {art:"chart",h:"Mapping Your Own Values and Type",p:[
+    "A useful first exercise is a values audit: list ten words that describe things you deeply respect in other people (honesty, courage, loyalty, curiosity, discipline...), then narrow the list to your top four. Those four are very likely close to your own core values — we tend to admire in others what we most want to embody ourselves.",
+    "Next, separate your personality type from your character. Type describes tendencies you were largely born with or developed very early (introversion, how you process information, what drains or energises you); character describes the virtues you choose to build regardless of type (honesty, discipline, patience, courage). Confusing the two leads people to either excuse poor character as 'just my personality' or exhaust themselves trying to change traits that were never a moral issue in the first place.",
+    "Finally, watch for identity statements that quietly limit you — phrases like \"I'm just not a confident person\" or \"I'm not good with people\" — and test them against evidence rather than accepting them as fixed facts. Susan Cain could easily have accepted \"I'm just not cut out for law\" as a permanent identity; instead she separated the true fact (she is an introvert) from the false conclusion (introverts can't be powerful), which is exactly the distinction this module asks you to practise."
+   ]}
+  ],
+  activity:"Complete a values audit: list ten qualities you admire in others, narrow them to your top four, then write one sentence on how your daily choices this week did or didn't reflect each one.",
+  check:[
+   {q:"What was the actual turning point in Susan Cain's story, according to this module?",o:["She decided to become more extroverted to fit in","She stopped fighting her natural personality and began building her confidence around her real strengths","She left the legal profession entirely with no further career","She adopted a completely new set of values borrowed from colleagues"],a:1},
+   {q:"How does this module distinguish values from beliefs?",o:["They are identical concepts with different names","Values are the principles you consider worth pursuing; beliefs are the assumptions you hold about how the world works","Values only apply to religious contexts","Beliefs are always more important than values"],a:1},
+   {q:"According to this module, why is confidence built on imitating someone else's personality considered fragile?",o:["Because imitation is illegal","Because it depends on successfully pretending to be someone else, unlike confidence built on self-knowledge","Because it takes too long to develop","Because only extroverts can be genuinely confident"],a:1},
+  ]},
+
+ {id:"sa_m3",n:3,title:"Emotional Intelligence",mins:120,icon:"Shield",
+  summary:"Understanding emotions, developing emotional regulation, and building empathy and social awareness so reactions become intentional rather than volatile.",
+  keyWords:["emotional intelligence","emotional regulation","empathy","social awareness","triggers"],
+  sections:[
+   {art:"control",h:"The Pitcher Who Calmed His Internal Storm",p:[
+    "In 2000, professional athlete Roy Halladay suffered one of the worst psychological meltdowns in baseball history. His performance dropped so low that his team demoted him to the minor leagues, effectively threatening to end his career. Roy was completely overwhelmed by his emotions — when he made a mistake on the field, anger and anxiety would take over, causing him to lose all self-control and focus. He was trapped in an intense cycle of emotional distress.",
+    "Roy knew he needed to develop deep emotional intelligence to survive. He began working intensely with sports psychologist Dr. Harvey Dorfman. Roy learned that while he could not control the chaotic events on the field, he had absolute control over his internal emotional regulation.",
+    "He started keeping a detailed journal, tracking his emotional triggers, physical sensations, and negative thoughts. He practised radical empathy for himself, learning to view failures as clean data rather than personal indictments. He mastered a simple routine: when tension rose, he would close his eyes, take a deep breath, and reset his focus entirely on the next pitch. The results were historic. Roy returned to the major leagues as a psychological fortress, became a two-time Cy Young Award winner, threw a legendary postseason no-hitter, and became a symbol of mental resilience globally."
+   ],ex:{t:"Conclusion",b:[
+    "Emotional intelligence is your shield against external chaos.",
+    "Developing strong emotional regulation and sharp social awareness ensures that your actions are driven by intentional intelligence rather than volatile reactions."
+   ]}},
+   {art:"listen",h:"Key Ideas in This Module",p:[
+    "Understanding emotions starts with recognising that every emotion carries useful information — anger often signals a violated boundary, anxiety often signals a perceived threat to something you value, sadness often signals a loss. Roy Halladay's meltdown wasn't caused by having emotions (every athlete does); it was caused by not understanding what his anger and anxiety were actually telling him, so they controlled him instead of informing him.",
+    "Emotional regulation is the skill of experiencing an emotion fully without being controlled by it — noticing the rise of anger or anxiety early, and choosing a deliberate response instead of an automatic reaction. Roy's breathing-and-reset routine is a textbook regulation technique: it doesn't suppress the emotion (which tends to backfire), it creates a few seconds of space between the feeling and the action, which is often all that's needed for the rational brain to catch up with the emotional one.",
+    "Empathy has two components worth separating: cognitive empathy (accurately understanding what someone else is thinking or feeling) and emotional empathy (actually feeling some version of what they feel). Roy's breakthrough included a third, less discussed form — self-empathy, treating his own failures with the same compassion he'd offer a struggling teammate rather than harsh self-judgment, which is what allowed him to view mistakes as 'clean data' instead of personal attacks on his worth.",
+    "Social awareness is the outward-facing half of emotional intelligence: accurately reading the emotional climate of a room, a conversation or a team, and adjusting your behaviour accordingly. It depends on the same skill of noticing that regulation does, just pointed outward — noticing someone else's tension, hesitation or excitement instead of only your own.",
+    "The four skills in this module build on each other in sequence: you cannot regulate an emotion you don't first understand, you cannot extend real empathy to others while you're flooded by your own unregulated reactions, and you cannot read a room accurately while you're preoccupied with managing an internal storm. This is why Roy's recovery started with self-understanding and self-regulation before it ever reached the level of skilful, composed performance under pressure."
+   ]},
+   {art:"measure",h:"Building Your Own Emotional Regulation Practice",p:[
+    "Start an emotion log for one week: each time you notice a strong reaction, write down the trigger, the physical sensation (tight chest, racing heart, clenched jaw), the emotion name, and the thought that came with it. Roy Halladay's journal did exactly this, and the simple act of naming a trigger reduces its power — psychologists call this 'affect labelling', and it measurably calms the brain's threat response.",
+    "Practise the pause-and-reset technique in low-stakes moments before you need it in high-stakes ones: when you feel a small flash of irritation in traffic or a minor frustration at home, deliberately take one slow breath and ask 'what's the most useful next action here?' before reacting. Building the habit when the cost of a slip is low makes it far more likely to hold when the cost is high.",
+    "Finally, apply self-empathy deliberately after a mistake by asking what you would say to a good friend in the same situation, then say that to yourself instead of the harsher internal script most people default to. This isn't about lowering your standards — Roy Halladay held himself to elite standards — it's about treating a mistake as data to learn from rather than proof of inadequacy, which is precisely what allowed him to keep improving instead of spiralling."
+   ]}
+  ],
+  activity:"Keep a one-week emotion log. Each time you notice a strong reaction, record the trigger, the physical sensation, the emotion name, and the thought behind it — then look for one repeating pattern at the end of the week.",
+  check:[
+   {q:"What specifically caused Roy Halladay's career-threatening meltdown, according to this module?",o:["A permanent physical injury","Being overwhelmed by unregulated anger and anxiety whenever he made a mistake","A decision to retire early","A conflict with his coaching staff over strategy"],a:1},
+   {q:"What is the key difference between cognitive empathy and emotional empathy, as described in this module?",o:["There is no real difference between them","Cognitive empathy is accurately understanding what someone feels; emotional empathy is actually feeling some version of it yourself","Cognitive empathy only applies to strangers","Emotional empathy is a synonym for sympathy with no distinction"],a:1},
+   {q:"Why does this module argue that emotional regulation must come before social awareness in practice?",o:["Because social awareness is not a real skill","Because you cannot accurately read others' emotional states while flooded by your own unregulated reactions","Because regulation and social awareness are unrelated skills","Because social awareness only matters in professional sports"],a:1},
+  ]},
+
+ {id:"sa_m4",n:4,title:"Strengths and Weaknesses",mins:120,icon:"Target",
+  summary:"Identifying your genuine strengths, managing your weaknesses realistically, and building the positive habits that let your strengths compound over time.",
+  keyWords:["strengths","weaknesses","positive habits","strategic collaboration","self-mastery"],
+  sections:[
+   {art:"achieve",h:"Unlocking Greatness by Managing Around Flaws",p:[
+    "As a child in school, Richard Branson was labelled as slow and disruptive by his teachers. He suffered from severe dyslexia at a time when schools had little understanding of learning differences. He failed standard academic tests, could not read maps, and struggled immensely with basic maths tracking. His academic weaknesses were overwhelming, and he was told he would never achieve anything meaningful in life.",
+    "Richard made a critical decision that saved his future: he refused to spend his life trying to fix his unfixable weaknesses. Instead, he chose a strengths-based path, focusing entirely on his natural talents — networking, storytelling, vision, and building strong relationships.",
+    "When he founded Virgin Records in the 1970s, he could not read a corporate financial balance sheet. Instead of hiding this weakness or burning out trying to become an accountant, he hired talented partners who excelled at finance, and focused his own energy on creative marketing, discovering new musical talent, and motivating his teams. By leaning heavily into his personal strengths and managing his weaknesses through strategic collaboration, Richard built a global empire spanning aviation, music, and telecommunications."
+   ],ex:{t:"Conclusion",b:[
+    "Personal growth does not mean becoming perfect at everything.",
+    "True mastery lies in identifying your core strengths, magnifying them daily, and building positive habits to manage your weaknesses so they never derail your vision."
+   ]}},
+   {art:"weigh",h:"Key Ideas in This Module",p:[
+    "Identifying personal strengths starts with looking for patterns, not isolated achievements: what tasks make you lose track of time, what do people consistently ask for your help with, and what comes to you with noticeably less effort than it seems to take others? Richard Branson's strengths — networking, storytelling, vision — weren't discovered through a test; they were the activities that energised him even while his academic weaknesses were being punished by a school system that only measured one narrow kind of ability.",
+    "Managing weaknesses is a different skill from fixing them, and confusing the two wastes enormous energy. A weakness worth fixing is usually a skill gap that blocks something you actually want (a shy person avoiding public speaking might benefit from practice); a weakness worth managing is often a fixed trait or limitation that no amount of effort will fully remove (Branson's dyslexia was never going to become a reading strength). The strategic move Branson made — hiring partners who excelled where he didn't — is called strategic collaboration, and it is available to anyone: you rarely need to personally master every skill required for a goal, only to ensure someone on your team, or in your life, covers what you don't.",
+    "Building positive habits is what turns an identified strength into a compounding asset instead of a one-off talent. A strength that's only used occasionally stays a modest talent; the same strength exercised through a daily or weekly habit becomes a genuine, hard-to-replicate advantage over years. This is the mechanism behind Branson's empire — not a single moment of genius, but decades of consistently investing energy into the same small set of natural strengths.",
+    "A common trap is 'balanced mediocrity' — the belief that a well-rounded person should aim for a similar, moderate level of competence in every area of life. Branson's story directly contradicts this: he was not, and never became, well-rounded in finance or literacy — he was exceptionally strong in a narrow set of strengths and deliberately outsourced the rest. Chasing balance across everything often produces a person who is unremarkable everywhere, while chasing excellence in a few genuine strengths — while simply managing the rest well enough — produces the kind of outsized results this module's story describes.",
+    "None of this means weaknesses can be ignored entirely. 'Managing around' a weakness still requires an honest audit of which weaknesses are dangerous if left unmanaged (a business owner who is disorganised with money still needs an accountant, not just good intentions) versus which are simply irrelevant to your goals and safe to leave alone."
+   ]},
+   {art:"steps",h:"Turning a Strength Into a Habit",p:[
+    "Start with a strengths inventory: list five moments in the last year when you felt genuinely capable and energised, then look for the common skill underneath each one — the pattern usually reveals two or three real strengths, not a long list of vague positives.",
+    "For each identified strength, design one small, repeatable action that exercises it at least weekly. A strength that shows up once and is never practised again fades; the same strength practised weekly, even in a small way, compounds into visible skill within months, exactly as Branson's storytelling and networking sharpened through years of consistent use, not a single burst of talent.",
+    "For each weakness that genuinely matters to your goals, choose one of two honest strategies rather than pretending you'll simply 'try harder': either build the minimum competence needed to not be blocked by it, or find someone — a partner, mentor, colleague or professional — who covers it, the way Branson's finance partners covered what dyslexia made difficult for him. Both are legitimate; what's not legitimate is ignoring a weakness that is actively sabotaging your goals and hoping it resolves itself."
+   ]}
+  ],
+  activity:"Write down five moments in the last year when you felt genuinely capable and energised. Identify the common strength underneath them, then design one small weekly action that exercises it.",
+  check:[
+   {q:"What critical decision did Richard Branson make about his academic weaknesses, according to this module?",o:["He spent years trying to fully overcome his dyslexia before starting a business","He refused to spend his life fixing unfixable weaknesses and instead focused entirely on his natural strengths","He avoided all business ventures that required financial understanding","He hid his dyslexia and pretended it did not affect him"],a:1},
+   {q:"How does this module distinguish 'managing' a weakness from 'fixing' it?",o:["There is no meaningful distinction between the two","Fixing applies to skill gaps blocking a goal; managing applies to more fixed limitations better handled through strategies like collaboration","Managing means ignoring the weakness completely","Fixing is only relevant to academic weaknesses"],a:1},
+   {q:"What does this module identify as the 'balanced mediocrity' trap?",o:["The mistaken belief that aiming for moderate competence in every area beats developing a few genuine strengths deeply","The idea that everyone should specialise in only one skill","A financial strategy for large companies","A teaching method used in traditional schools"],a:0},
+  ]},
+
+ {id:"sa_m5",n:5,title:"Goal Setting and Personal Growth",mins:120,icon:"ClipboardCheck",
+  summary:"Clarifying your vision and purpose, setting SMART goals, and building a personal development plan that turns growth from random luck into a system.",
+  keyWords:["vision","purpose","SMART goals","personal development plan","systematic growth"],
+  sections:[
+   {art:"achieve",h:"The Notebook That Launched a Television Empire",p:[
+    "In 1984, Oprah Winfrey moved to Chicago to host a low-rated, local morning talk show. The market was highly competitive, dominated by established television hosts. It would have been easy for her to simply try to survive day-to-day. However, Oprah possessed a vivid sense of personal vision and long-term purpose — she knew exactly what kind of impact she wanted to make on global media.",
+    "She implemented a structured personal development plan built around sharp goal setting. She didn't just wish for success; she documented her goals with immense clarity. She wanted her show to be syndicated nationally, she wanted total creative ownership of her content, and she wanted her platform to uplift human consciousness rather than exploit cheap sensationalism.",
+    "She aligned her daily routines with these SMART milestones, systematically negotiating her contracts, upgrading her communication skills, and planning every episode backward from her ultimate purpose. By 1986, The Oprah Winfrey Show was broadcast across the country, completely changing the landscape of television history. She proved that when your daily actions are tied to a structured personal development plan, your growth moves from random luck to systematic achievement."
+   ],ex:{t:"Conclusion",b:[
+    "A life without clear goals is like a ship without a rudder.",
+    "Designing a crystal-clear personal development plan anchored by SMART goals transforms your abstract inner vision into an actionable roadmap for long-term success."
+   ]}},
+   {art:"target",h:"Key Ideas in This Module",p:[
+    "Vision and purpose sit above individual goals: vision is a vivid picture of the future you're working toward, and purpose is the deeper reason that future matters to you. Oprah's vision wasn't simply 'a successful TV show' — it was a show with national reach, full creative ownership, and a positive impact on how people saw themselves and each other. That layer of purpose is what kept her decisions coherent across years, rather than chasing whatever opportunity looked good in the moment.",
+    "SMART goals translate a vision into something you can actually act on: Specific (precisely what will be true), Measurable (how you'll know it happened), Achievable (realistic given your current resources and timeline), Relevant (genuinely connected to your larger vision), and Time-bound (a clear deadline). \"I want to be successful\" is a vision, not a goal; \"syndicate this show nationally within two years\" is a SMART goal because it can be tracked, and either happens by the deadline or doesn't.",
+    "A personal development plan is the document — literal or mental — that connects your daily actions to your SMART goals to your larger vision, across all three time horizons at once. Oprah's plan worked because every layer connected: her daily habit of preparation connected to a goal of stronger interviews, which connected to the larger goal of national syndication, which connected to her purpose of uplifting her audience. Remove any one layer and the system collapses into either aimless daily activity or an inspiring vision with no practical path toward it.",
+    "Working backward from purpose to daily action — sometimes called reverse-engineering a goal — is the specific technique Oprah used when she 'planned every episode backward from her ultimate purpose'. Instead of starting with today and hoping it eventually adds up to something meaningful, you start with the end state, break it into yearly milestones, break those into quarterly and monthly goals, and finally arrive at what needs to happen this week. This sequencing is what prevents SMART goals from becoming a disconnected checklist rather than a coherent plan.",
+    "Systematic growth, the module's central idea, is the difference between hoping for progress and engineering it. Random luck occasionally produces success, but it's not repeatable and doesn't compound; a genuine system — clear vision, SMART goals, and a development plan connecting the two — produces results that are both repeatable and cumulative, which is exactly the shift Oprah made when she stopped simply hoping for a bigger show and started systematically building toward one."
+   ]},
+   {art:"chart",h:"Writing Your Own Development Plan",p:[
+    "Start at the top: write one sentence describing your vision five years from now, then one sentence describing the deeper purpose behind it — why that future matters to you personally, not just what it looks like from the outside.",
+    "Break the vision into two or three SMART goals for the coming year, checking each one against all five criteria in turn. A goal that fails the 'measurable' test (how would you actually know you achieved it?) or the 'time-bound' test (by when?) isn't yet a real goal — it's still a wish, and wishes are far easier to abandon under pressure than a dated, measurable commitment.",
+    "Finally, reverse-engineer one of those yearly goals into a single concrete action for this week. This is the step most personal development plans skip, and it's the one that actually matters day to day — Oprah's national syndication goal only became real because it was broken down into what needed to happen in that week's specific episode, not left as a distant, abstract ambition."
+   ]}
+  ],
+  activity:"Write your five-year vision in one sentence, then your deeper purpose behind it in another. Break the vision into one SMART goal for this year, and reverse-engineer it into a single action for this week.",
+  check:[
+   {q:"What distinguished Oprah Winfrey's approach in 1984, according to this module?",o:["She focused purely on short-term ratings with no larger plan","She held a vivid vision and purpose, then built a structured personal development plan with SMART milestones to reach it","She copied the exact strategy of a competing host","She avoided setting any specific goals to stay flexible"],a:1},
+   {q:"Which of the following correctly completes the SMART goal framework as described in this module?",o:["Specific, Measurable, Achievable, Relevant, Time-bound","Simple, Manageable, Attainable, Reasonable, Timely","Structured, Motivational, Ambitious, Realistic, Tracked","Sequential, Measured, Agreed, Ranked, Tested"],a:0},
+   {q:"What does 'reverse-engineering' a goal mean, according to this module?",o:["Abandoning a goal once it becomes difficult","Starting from the desired end state and breaking it down into yearly, then monthly, then weekly actions","Copying someone else's exact daily schedule","Setting a goal without any defined timeline"],a:1},
+  ]},
+
+ {id:"sa_m6",n:6,title:"Communication and Relationships",mins:120,icon:"Users",
+  summary:"Building effective communication skills, resolving conflict constructively, and cultivating the healthy relationships that determine much of your quality of life.",
+  keyWords:["effective communication","conflict resolution","active listening","healthy relationships","negotiation"],
+  sections:[
+   {art:"talk",h:"The Mediation That Unshackled a Global Icon",p:[
+    "In 1990, Nelson Mandela walked out of prison after 27 years of isolation. He stepped into a nation on the brink of a bloody civil war. The bitter conflict between the Apartheid government and the liberation movements was deeply intense — the air was filled with distrust, anger, and violent rhetoric. Traditional communication had broken down completely, and the prospects for a peaceful transition were practically zero.",
+    "Mandela knew that to build a healthy, unified nation, he had to use exceptional conflict resolution and advanced relationship-building strategies. He had to communicate effectively with the very men who had imprisoned him.",
+    "He chose to sit face-to-face with President F.W. de Klerk during the historic CODESA negotiations. Mandela practised active listening, regulated his own deep trauma, and used precise, respectful language that acknowledged the fears of his opponents while holding firm to absolute justice. He avoided toxic, retaliatory arguments and focused on shared human values. This masterful approach to communication averted a national catastrophe, secured a peaceful democratic transition, and earned both men the Nobel Peace Prize in 1993."
+   ],ex:{t:"Conclusion",b:[
+    "The quality of your life is determined by the quality of your relationships.",
+    "Cultivating masterful communication and conflict resolution skills allows you to bridge deep divides and build lasting, healthy alliances."
+   ]}},
+   {art:"social",h:"Key Ideas in This Module",p:[
+    "Effective communication is not primarily about speaking well — it's about ensuring the other person accurately receives the meaning you intend, and that you accurately receive theirs. Mandela's negotiating skill wasn't eloquence for its own sake; it was precision paired with respect, choosing language that acknowledged de Klerk's fears without abandoning his own non-negotiable demand for justice. Communication that sacrifices clarity for niceness, or honesty for diplomacy, tends to fail in exactly the high-stakes moments when it matters most.",
+    "Active listening is the specific skill of fully focusing on, accurately understanding, and clearly demonstrating that you've understood what someone else has said, before responding. It has concrete components: not interrupting, reflecting back what you heard in your own words, and asking clarifying questions rather than assuming. Mandela's ability to sit across from the men who had imprisoned him and genuinely listen — rather than simply waiting for his turn to speak — was a large part of what made the CODESA negotiations possible at all.",
+    "Conflict resolution depends on separating the person from the problem and the position from the underlying interest. Mandela and de Klerk held opposing positions (continued white-minority rule versus full democratic transition), but the negotiations succeeded because both sides were eventually able to address the deeper interests underneath — security, dignity, and a stable future — rather than only refighting the surface-level positions.",
+    "Regulating your own emotional trauma or history, as Mandela had to do after 27 years of imprisonment, is often the hardest and most overlooked step in any difficult conversation. Unresolved anger or hurt doesn't disappear just because a negotiation has begun; it leaks into tone, word choice and patience. Mandela's discipline in setting aside personal grievance during the negotiation itself — without pretending the grievance didn't exist — is a skill this module asks you to practise at a much smaller scale, in ordinary disagreements with colleagues, friends or family.",
+    "Building healthy relationships, ultimately, is the accumulated result of consistently applying these skills over time rather than a single successful conversation. A relationship — between nations or between two people — is healthy to the degree that both sides trust that hard conversations will be handled with honesty, respect and a genuine search for shared ground, exactly the pattern the CODESA negotiations modelled at the largest possible scale."
+   ]},
+   {art:"agency",h:"Practising Difficult Conversations",p:[
+    "Before your next difficult conversation, separate the position from the interest: write down what the other person is asking for (their position), then ask yourself what they actually need underneath that request (their interest) — security, respect, fairness, being heard. Addressing the interest usually opens far more room for resolution than arguing about the position.",
+    "During the conversation, practise one concrete active-listening habit: before responding to a disagreement, say back what you heard the other person say in your own words and ask if you understood correctly. This single habit — used throughout the CODESA talks — slows the conversation down enough to prevent the reactive escalation that derails most conflicts.",
+    "Afterward, reflect honestly on whether your own unresolved emotion shaped how the conversation went. If a conversation went worse than it needed to, ask whether an old grievance, a stereotype, or built-up frustration leaked into your tone before you'd consciously decided to bring it in — and if so, treat that as information for the next difficult conversation, not as a reason to avoid having one."
+   ]}
+  ],
+  activity:"Think of one ongoing disagreement in your life. Write down the other person's stated position, then your best honest guess at their deeper underlying interest. Plan one sentence you could say that addresses the interest, not just the position.",
+  check:[
+   {q:"What specific challenge did Nelson Mandela face heading into the CODESA negotiations, according to this module?",o:["A lack of public support for any transition","Having to communicate effectively and build trust with the very people who had imprisoned him, amid deep national distrust","No real disagreement existed between the parties","A purely economic dispute with no political dimension"],a:1},
+   {q:"What is the key difference between a 'position' and an 'interest' in conflict resolution, as described in this module?",o:["They are the same thing with different names","A position is what someone is asking for; an interest is the deeper need underneath that request","Interests only apply to international diplomacy","Positions are always more important to address than interests"],a:1},
+   {q:"What does active listening specifically involve, according to this module?",o:["Waiting silently for your turn to speak without any response","Fully focusing on, understanding, and demonstrating understanding of what someone said before responding","Interrupting to correct inaccuracies as quickly as possible","Avoiding eye contact to reduce social pressure"],a:1},
+  ]},
+
+ {id:"sa_m7",n:7,title:"Leadership and Influence",mins:120,icon:"Sparkles",
+  summary:"Understanding personal leadership, sound decision-making, integrity, and accountability — the character-based foundations of influence with or without formal authority.",
+  keyWords:["personal leadership","decision making","integrity","accountability","influence"],
+  sections:[
+   {art:"control",h:"The Choice to Stay in the Room",p:[
+    "In 1965, Admiral James Stockdale's plane was shot down over enemy territory. He was captured and spent the next seven years in a brutal prison camp, tortured repeatedly and denied basic human rights. As the highest-ranking naval officer in the camp, Stockdale knew he was facing a severe test of personal leadership, integrity, and raw accountability.",
+    "He had no actual military rank or physical weapons to enforce his authority over the other prisoners — his influence relied entirely on his character. He created a secret communication code through the prison walls, providing step-by-step instructions on how his men could survive torture without giving up military secrets.",
+    "He implemented a strict rule of zero self-pity and total accountability. He told his men to face the brutal facts of their current reality with absolute honesty, while maintaining unwavering faith that they would prevail in the end — a concept now known globally as the Stockdale Paradox. When offered early release by his captors for propaganda purposes, he chose to stay in prison with his men, enduring more torture to protect his integrity. His exceptional personal leadership kept his men alive and united, proving that true influence is born from character choices during times of crisis."
+   ],ex:{t:"Conclusion",b:[
+    "Leadership is not a title; it is a choice.",
+    "True personal leadership requires unyielding integrity and total accountability, allowing you to influence and guide others even when you have no formal authority."
+   ]}},
+   {art:"law",h:"Key Ideas in This Module",p:[
+    "Personal leadership means taking ownership of your own thoughts, choices and standards regardless of whether anyone has given you formal authority over others. Stockdale had no way to enforce compliance in the prison camp — no rank meant anything to his captors, and he could not punish or reward the other prisoners. His leadership existed entirely because he consistently held himself to a visible standard that others chose to follow.",
+    "Decision-making under pressure is tested most clearly by moments with no good options, only better and worse ones — exactly Stockdale's situation when offered early release. Taking it would have granted him personal relief at the cost of his men's morale and his own integrity; refusing it meant more torture. Sound decision-making in genuinely hard moments usually means asking not 'what gets me out of discomfort fastest' but 'what choice can I live with and still respect myself for, regardless of the short-term cost.'",
+    "Integrity is the consistency between your stated values and your actual behaviour, especially when no one would ever know if you compromised. Stockdale's refusal of early release is the clearest possible illustration: accepting would have cost him nothing observable to the outside world in the moment, but it would have violated the standard he had set for his men and himself, which is precisely why integrity is tested most sharply in private or unwitnessed moments, not public ones.",
+    "Accountability means owning the outcomes of your choices — good and bad — without deflecting blame elsewhere, and it is the trait Stockdale demanded from his men above all else: face the brutal facts, don't indulge in self-pity, and take responsibility for your own conduct even in an unjust and brutal situation you did not create. Total accountability doesn't mean blaming yourself for things outside your control (Stockdale never blamed his men for being captured); it means taking full ownership of the parts that were within their control, however small.",
+    "The Stockdale Paradox itself — retaining unwavering faith that you will prevail in the end, while simultaneously confronting the most brutal facts of your current reality without flinching — resolves what looks like a contradiction. Blind optimism that ignores present reality tends to collapse the moment reality intrudes; pure realism without any faith in an eventual better outcome tends to collapse into despair. Holding both at once — Stockdale's actual survival strategy — is what allows sustained influence and leadership through genuinely difficult circumstances, at any scale from a prison camp to an ordinary hard season of life."
+   ]},
+   {art:"achieve",h:"Applying the Stockdale Paradox Personally",p:[
+    "When facing a serious setback, write two separate lists: the brutal facts of your current situation exactly as they are, with no minimising or exaggeration, and then, separately, the concrete reasons you have to believe things can improve. Keeping both lists visible — rather than only one — is the practical version of holding the paradox Stockdale described.",
+    "Practise leading without formal authority in small, everyday settings: on a team project, in a friend group, or within your family, look for a moment to set a visible standard through your own conduct rather than waiting for a title that grants you permission to lead. Stockdale's influence over the other prisoners came entirely from consistent character, which is available to anyone in any position, not only those with an official rank.",
+    "Finally, audit one recent decision for integrity rather than convenience: was there a moment recently where the easier path and the value-aligned path diverged, and which one did you choose? This module isn't asking for retroactive guilt — it's asking for the same honest self-audit Stockdale insisted on: face the fact plainly, then decide what you'll do differently next time."
+   ]}
+  ],
+  activity:"Write your own two-column 'Stockdale list': the brutal facts of a current challenge in one column, and the concrete reasons you have to believe it can improve in the other. Keep both visible for a week.",
+  check:[
+   {q:"What made Admiral Stockdale's leadership over the other prisoners possible, according to this module?",o:["His formal military rank, which his captors respected","His consistent character and self-set standards, since he had no real authority to enforce compliance","A system of rewards he could offer the other prisoners","Support from an external government negotiating on his behalf"],a:1},
+   {q:"What is the 'Stockdale Paradox' as defined in this module?",o:["Believing everything will resolve itself without any action","Holding unwavering faith in eventual success while confronting the brutal facts of the current reality without flinching","Refusing to acknowledge difficult facts to maintain morale","A purely pessimistic outlook with no belief in improvement"],a:1},
+   {q:"According to this module, when is personal integrity actually tested most sharply?",o:["Only in public situations where others are watching","In private or unwitnessed moments, when compromising would cost nothing observable to others","Only during formal negotiations","Integrity cannot really be tested, only claimed"],a:1},
+  ]},
+
+ {id:"sa_m8",n:8,title:"Final Project: Personal Growth Portfolio",mins:150,icon:"BookOpen",
+  summary:"Bringing every module together into a single Personal Growth Portfolio — a structured, evidence-based document proving your self-awareness, character and readiness to grow.",
+  keyWords:["personal growth portfolio","synthesis","self-reflection","development plan","capstone"],
+  sections:[
+   {art:"achieve",h:"The Dynamic Blueprint of an International Leader",p:[
+    "In 2025, an ambitious professional felt completely stuck in a middle-management role. They had plenty of technical skills, but they were consistently overlooked for senior leadership positions because they lacked a cohesive vision for their life and career. They decided to treat their career development as a formal project, enrolling in a deep self-awareness programme and synthesising their insights into a comprehensive Personal Growth Portfolio.",
+    "They systematically built out every core component of the project: a deep profile of their personality and identity, mapping their core values and character strengths; a documented emotional intelligence plan, outlining their specific emotional triggers and active regulation strategies; an audited list of their strengths and weaknesses, with clear action steps on how they manage their limitations; and finally, an actionable five-year personal development plan built entirely on SMART goals.",
+    "They did not hide this portfolio away; they shared it digitally with their executive mentors during a routine career review. The executive board was stunned by the deep self-reflection, structured self-confidence, and clear roadmap presented in the portfolio. Within three months, they bypassed traditional promotion lines and appointed the professional to lead an international project office, fully proving that a well-executed growth portfolio is the ultimate proof of leadership readiness."
+   ],ex:{t:"Conclusion",b:[
+    "The Personal Growth Portfolio is the physical manifesto of your self-awareness transformation.",
+    "Binding your values, emotional strategies, strengths, and goals into a single, cohesive document creates an undeniable blueprint for your personal, academic, and professional destiny."
+   ]}},
+   {art:"layers",h:"Building Your Own Portfolio",p:[
+    "Your Personal Growth Portfolio pulls directly from every earlier module, turned from reflection into a single organised document. The first section is your self-awareness foundation from Module 1: a short, honest statement of your current reality, including at least one blind spot you've identified through outside feedback rather than only self-assessment.",
+    "The second section is your personality and identity profile from Module 2: your core values (from your values audit), your natural personality tendencies, and one identity statement you've deliberately rewritten based on evidence rather than inherited assumption. The third section is your emotional intelligence plan from Module 3: your most common emotional triggers, the physical and mental patterns that accompany them, and the specific regulation technique you're committing to practising.",
+    "The fourth section is your strengths-and-weaknesses audit from Module 4: your two or three genuine strengths with a weekly habit that exercises each one, and your key weaknesses with an honest strategy for each — either building minimum competence or finding collaborative support. The fifth section is your five-year development plan from Module 5, complete with your vision statement, your purpose, and this year's SMART goals reverse-engineered into concrete weekly actions.",
+    "The sixth section reflects your communication and relationships work from Module 6: one significant relationship or recurring conflict, and the position-versus-interest analysis you applied to it. The final section reflects your leadership and influence work from Module 7: one example of personal leadership you've exercised without relying on formal authority, and your own written version of the Stockdale Paradox applied to a real challenge you're currently facing.",
+    "Assembling these seven pieces into a single, coherent document — rather than leaving them scattered across separate exercises — is what turns a series of good reflections into genuine proof of readiness, exactly as it did for the professional in this module's case study. A portfolio is not meant to be perfect or finished; it is meant to be honest, specific, and revisited as you keep growing."
+   ]}
+  ],
+  activity:"Assemble your full Personal Growth Portfolio using the seven sections outlined above, drawing directly from the exercises you completed in Modules 1 through 7. Share it with one trusted mentor, manager or friend and ask for honest feedback.",
+  check:[
+   {q:"What transformed the professional's career trajectory in this module's case study?",o:["A random promotion with no clear cause","Systematically building and sharing a comprehensive Personal Growth Portfolio synthesising their self-awareness work","Switching to a completely unrelated career field","Avoiding any formal review of their progress"],a:1},
+   {q:"According to this module, what should the Personal Growth Portfolio's sections be built from?",o:["Generic templates unrelated to the learner's own life","The learner's own completed exercises and reflections from each of the course's earlier modules","A single, isolated reflection written in one sitting","Someone else's completed portfolio, copied directly"],a:1},
+   {q:"What is the module's final message about the purpose of the portfolio?",o:["It must be perfect and finished before it has any value","It should be honest, specific, and revisited as ongoing growth continues, rather than a one-time finished product","It has no practical value beyond the course itself","It should be kept permanently private and never shared"],a:1},
+  ]},
+];
+
+// ═══ SELF-AWARENESS MASTERY — 100-QUESTION EXAM BANK (SA_Q) ═══
+// Extremely difficult level. Distribution: 13 questions each for modules
+// 1,2,3,4 (13x4=52) and 12 questions each for modules 5,6,7,8 (12x4=48).
+// Total = 100.
+const SA_Q=[
+ // ── Module 1: Introduction to Self-Awareness (13) ──
+ {ao:"Introduction to Self-Awareness",q:"What was the true root cause of Ford's near-bankruptcy culture before Mulally's intervention, according to this module?",o:["A shortage of talented engineers","A toxic culture where executives hid mistakes out of fear, producing organisational blindness to reality","Excessive government regulation","A lack of consumer demand for cars"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What did Mulally's weekly business review specifically require of his executives?",o:["Submitting anonymous written reports only","Colour-coding project charts green, yellow or red to reflect real project status","Attending mandatory off-site retreats","Avoiding any discussion of ongoing problems"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"How did Mulally react when Mark Fields presented a chart with a red indicator?",o:["He fired Fields immediately for the failure","He praised Fields for his courage and self-awareness in surfacing the problem","He ignored the chart and moved to the next presenter","He demoted Fields to a lower position"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What is internal self-awareness, as distinguished from external self-awareness in this module?",o:["Awareness limited to physical health only","How well you understand your own inner world of thoughts, emotions and values","A synonym for external self-awareness with no real difference","Knowledge of internal company policies"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"Why does this module argue self-awareness underlies every other skill in the course?",o:["Because it has no real connection to other skills","Because regulating emotions, setting goals and communicating well all depend on first seeing your reality accurately","Because it is the easiest skill to master","Because other skills can be learned without any self-awareness at all"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What are blind spots, according to this module's definition?",o:["Permanent character flaws that cannot change","Parts of yourself obvious to others but invisible to you, a universal feature of being human rather than a flaw","Areas where you have complete self-knowledge","Something only unsuccessful people experience"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"In the Known/Unknown grid described in this module, what is the 'hidden self'?",o:["Things neither you nor anyone else knows about you","Things you know about yourself but hide from others","Things everyone, including you, knows openly","Things only visible to close family members"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What does growth mean in terms of the Known/Unknown grid, according to this module?",o:["Expanding the blind spot and hidden self as much as possible","Shrinking the blind spot and hidden self by sharing more and inviting feedback on what you can't see","Keeping all four quadrants exactly equal in size","Eliminating the open self entirely for privacy"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What specific question does this module recommend asking a trusted person, rather than a vague request for feedback?",o:["\"Do you like me?\"","\"What's one thing I do that you think I'm not fully aware of?\"","\"Am I a good person?\"","\"What should I do with my life?\""],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What is 'defensive listening', as described in this module?",o:["Listening carefully without any reaction","The instinctive reaction to explain, justify or minimise a hard truth before actually absorbing it","A technique for improving memory","A formal negotiation strategy"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What made Mulally's meetings psychologically safe for honest reporting, according to this module?",o:["Strict punishment for any red chart presented","Responding to bad news with praise and support rather than blame, as shown with Mark Fields","Removing all accountability from the review process","Requiring anonymous submissions only"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"What is the end-of-day reflection technique recommended in this module?",o:["A one-hour nightly meditation session","Three short questions each evening: what went well, what didn't, and what that reveals about you","A weekly performance review with a manager","An annual personal audit"],a:1},
+ {ao:"Introduction to Self-Awareness",q:"According to this module, why is self-awareness described as 'a practice, not a one-time discovery'?",o:["Because a single moment of insight fades unless supported by a regular habit of self-checking and feedback","Because it only needs to be addressed once in a lifetime","Because practice has no real effect on self-awareness","Because Mulally only held one meeting to fix Ford's culture"],a:0},
+
+ // ── Module 2: Personality and Identity (13) ──
+ {ao:"Personality and Identity",q:"What pressure did Susan Cain face in law school and at her corporate firm, according to this module?",o:["Pressure to work fewer hours","Pressure to speak over others, network aggressively, and hide her naturally quiet, reflective traits","Pressure to change her area of legal specialisation","Pressure to relocate internationally"],a:1},
+ {ao:"Personality and Identity",q:"What was the actual turning point in Susan Cain's story?",o:["She decided to become more extroverted to fit in with colleagues","She stopped fighting her natural personality and built her confidence around her real strengths","She left the legal profession with no further career direction","She adopted values borrowed entirely from her colleagues"],a:1},
+ {ao:"Personality and Identity",q:"What book did Susan Cain write about her insights on personality and identity?",o:["The Power of Introverts","Quiet: The Power of Introverts in a World That Can't Stop Talking","Loud and Proud: An Extrovert's Guide","The Corporate Lawyer's Handbook"],a:1},
+ {ao:"Personality and Identity",q:"How does this module distinguish values from beliefs?",o:["They are identical concepts with different names","Values are the principles you consider worth pursuing; beliefs are the assumptions you hold about how the world works","Values only apply in religious contexts","Beliefs are always more important than values"],a:1},
+ {ao:"Personality and Identity",q:"What internal tension does this module describe as an example of values and beliefs interacting poorly?",o:["Valuing wealth while believing money is unimportant","Valuing connection while believing that showing vulnerability is weakness","Valuing honesty while believing lying is acceptable","There is no possible tension between values and beliefs"],a:1},
+ {ao:"Personality and Identity",q:"How is character development described in this module?",o:["A single dramatic decision that instantly changes a person","A long, deliberate process of aligning actions with stated values until they become habitual","A fixed trait determined entirely at birth","A skill that only applies to public figures"],a:1},
+ {ao:"Personality and Identity",q:"Why does this module argue that confidence built on imitation is fragile?",o:["Because imitation is against the law","Because it depends on successfully pretending to be someone else, unlike confidence built on self-knowledge","Because imitation always looks obviously fake to others","Because fragile confidence is actually more useful long-term"],a:1},
+ {ao:"Personality and Identity",q:"What is identity, according to this module's definition?",o:["A fixed, unchangeable biological trait","The ongoing story you tell about who you are, which can be examined and rewritten","A legal document establishing citizenship","A synonym for personality type with no distinction"],a:1},
+ {ao:"Personality and Identity",q:"What changed when Susan Cain shifted her identity from 'failed extrovert' to 'successful introvert', according to this module?",o:["Her actual personality traits changed completely","No facts about her personality changed — only the meaning she assigned to those facts changed","She became clinically diagnosed with a new personality type","Her career field changed entirely"],a:1},
+ {ao:"Personality and Identity",q:"What is a 'values audit', as described in this module's practical exercise?",o:["A financial review of personal spending","Listing ten qualities you admire in others, then narrowing them to your top four core values","A formal test administered by a psychologist","A review of your social media activity"],a:1},
+ {ao:"Personality and Identity",q:"How does this module distinguish personality type from character?",o:["They are exactly the same and can be used interchangeably","Type describes largely inborn or early-developed tendencies; character describes virtues you choose to build regardless of type","Character is fixed at birth while type can be changed easily","Type only matters for professional careers"],a:1},
+ {ao:"Personality and Identity",q:"What mistake does this module warn against regarding 'identity statements' like \"I'm just not a confident person\"?",o:["Accepting them as fixed facts without testing them against real evidence","Writing them down for reflection","Discussing them with a trusted friend","Comparing them to a personality assessment"],a:0},
+ {ao:"Personality and Identity",q:"What core lesson does Susan Cain's story ultimately teach about personality types, according to this module?",o:["That introversion is objectively superior to extroversion","That fighting your natural wiring to imitate a different type wastes energy that could build genuine strengths","That personality types have no real influence on behaviour","That everyone should aim to become more extroverted over time"],a:1},
+
+ // ── Module 3: Emotional Intelligence (13) ──
+ {ao:"Emotional Intelligence",q:"What specifically caused Roy Halladay's career-threatening meltdown, according to this module?",o:["A permanent physical injury sustained on the field","Being overwhelmed by unregulated anger and anxiety whenever he made a mistake","A public conflict with his team's ownership","A decision to retire early from professional sport"],a:1},
+ {ao:"Emotional Intelligence",q:"Who did Roy Halladay work with to rebuild his emotional intelligence?",o:["A personal financial advisor","Sports psychologist Dr. Harvey Dorfman","A physical therapist specialising in injuries","A media relations consultant"],a:1},
+ {ao:"Emotional Intelligence",q:"What specific practice did Roy Halladay use when tension rose during a game?",o:["Immediately leaving the field to cool down","Closing his eyes, taking a deep breath, and resetting his focus entirely on the next pitch","Arguing with the umpire to release frustration","Ignoring the tension completely without any technique"],a:1},
+ {ao:"Emotional Intelligence",q:"According to this module, what useful information does anger often signal?",o:["A violated boundary","Complete relaxation","A random, meaningless brain signal","Physical hunger"],a:0},
+ {ao:"Emotional Intelligence",q:"What is emotional regulation, as defined in this module?",o:["Suppressing all emotional expression entirely","Experiencing an emotion fully without being controlled by it, choosing a deliberate response instead of an automatic reaction","Avoiding situations that might trigger any emotion","A technique used only by professional athletes"],a:1},
+ {ao:"Emotional Intelligence",q:"How does this module distinguish cognitive empathy from emotional empathy?",o:["There is no real difference between the two","Cognitive empathy is accurately understanding what someone feels; emotional empathy is actually feeling some version of it yourself","Cognitive empathy only applies to strangers, not friends","Emotional empathy is a synonym for pity"],a:1},
+ {ao:"Emotional Intelligence",q:"What is self-empathy, as described in Roy Halladay's recovery process?",o:["Ignoring your own mistakes completely","Treating your own failures with the same compassion you'd offer a struggling teammate, rather than harsh self-judgment","A form of arrogance to be avoided","Blaming external circumstances for every failure"],a:1},
+ {ao:"Emotional Intelligence",q:"What is social awareness, according to this module?",o:["Awareness of social media trends","Accurately reading the emotional climate of a room or conversation and adjusting your behaviour accordingly","A synonym for extroversion","Knowledge of social etiquette rules only"],a:1},
+ {ao:"Emotional Intelligence",q:"Why does this module argue regulation must come before social awareness in practice?",o:["Because social awareness is not a genuine skill","Because you cannot accurately read others' emotional states while flooded by your own unregulated reactions","Because regulation and social awareness are entirely unrelated","Because social awareness only matters in professional sports settings"],a:1},
+ {ao:"Emotional Intelligence",q:"What is 'affect labelling', as mentioned in this module's practical section?",o:["A marketing technique for emotional advertising","Naming a trigger and the emotion it produces, which measurably reduces its power over the brain's threat response","A method for hiding emotions from others","A diagnostic tool used only by psychiatrists"],a:1},
+ {ao:"Emotional Intelligence",q:"What does this module recommend practising in low-stakes moments before high-stakes ones?",o:["Avoiding all emotional triggers entirely","The pause-and-reset technique, such as taking one slow breath before reacting to minor irritations","Arguing as often as possible to build tolerance","Suppressing every emotional reaction permanently"],a:1},
+ {ao:"Emotional Intelligence",q:"What result did Roy Halladay ultimately achieve after rebuilding his emotional intelligence?",o:["He left professional baseball permanently","He became a two-time Cy Young Award winner and a symbol of mental resilience","He remained in the minor leagues for the rest of his career","He was never allowed to pitch professionally again"],a:1},
+ {ao:"Emotional Intelligence",q:"What is the recommended question to ask yourself after a mistake, according to this module's self-empathy practice?",o:["\"Why am I always a failure?\"","\"What would I say to a good friend in the same situation?\"","\"Who else can I blame for this?\"","\"How can I avoid ever trying again?\""],a:1},
+
+ // ── Module 4: Strengths and Weaknesses (13) ──
+ {ao:"Strengths and Weaknesses",q:"What critical decision did Richard Branson make about his academic weaknesses, according to this module?",o:["He spent years trying to fully overcome his dyslexia before starting any business","He refused to spend his life fixing unfixable weaknesses and instead focused entirely on his natural strengths","He avoided all business ventures requiring financial understanding","He kept his dyslexia hidden and pretended it did not affect him"],a:1},
+ {ao:"Strengths and Weaknesses",q:"What natural talents did Richard Branson choose to focus on, according to this module?",o:["Accounting, spreadsheet analysis and financial modelling","Networking, storytelling, vision, and building strong relationships","Legal research and contract writing","Manufacturing and supply chain logistics"],a:1},
+ {ao:"Strengths and Weaknesses",q:"How did Branson handle his inability to read a corporate financial balance sheet at Virgin Records?",o:["He avoided founding the company until he learned accounting himself","He hired talented partners who excelled at finance while he focused on his own strengths","He shut down the company rather than deal with the weakness","He ignored the company's finances entirely with no oversight"],a:1},
+ {ao:"Strengths and Weaknesses",q:"How does this module recommend identifying personal strengths?",o:["Taking a single standardised test and accepting the result as final","Looking for patterns in what makes you lose track of time and what others consistently ask for your help with","Copying the stated strengths of a successful public figure","Avoiding self-reflection and waiting for others to point out your strengths"],a:1},
+ {ao:"Strengths and Weaknesses",q:"How does this module distinguish a weakness worth 'fixing' from one worth 'managing'?",o:["There is no meaningful distinction between the two","Fixing applies to skill gaps blocking a goal; managing applies to more fixed limitations better handled through strategies like collaboration","Managing means ignoring the weakness completely with no strategy","Fixing only applies to weaknesses in academic settings"],a:1},
+ {ao:"Strengths and Weaknesses",q:"What is 'strategic collaboration', as illustrated by Branson's story?",o:["Personally mastering every skill required for a goal","Ensuring someone on your team or in your life covers a weakness you don't need to personally master","Avoiding teamwork entirely to maintain full control","A legal strategy for business mergers"],a:1},
+ {ao:"Strengths and Weaknesses",q:"What turns an identified strength into a compounding asset, according to this module?",o:["Using it only once for maximum novelty","Building a positive habit that exercises it consistently through a daily or weekly routine","Keeping it a secret from others","Avoiding any further development of it"],a:1},
+ {ao:"Strengths and Weaknesses",q:"What is the 'balanced mediocrity' trap described in this module?",o:["The mistaken belief that aiming for moderate competence in every area beats developing a few genuine strengths deeply","The idea that everyone should specialise in only one narrow skill","A financial planning strategy for large corporations","A teaching method used exclusively in primary schools"],a:0},
+ {ao:"Strengths and Weaknesses",q:"According to this module, did Branson ever become 'well-rounded' in finance or literacy?",o:["Yes, he eventually mastered both completely","No — he remained exceptionally strong in a narrow set of strengths and deliberately outsourced the rest","Yes, but only after retiring from business","The module does not address this question at all"],a:1},
+ {ao:"Strengths and Weaknesses",q:"What does this module say about weaknesses that are 'dangerous if left unmanaged'?",o:["They should always be completely ignored regardless of consequences","They still require an honest audit and a real strategy, even under a strengths-based approach","They are impossible to manage under any circumstances","They only apply to weaknesses in physical health"],a:1},
+ {ao:"Strengths and Weaknesses",q:"What is the first step in the 'strengths inventory' exercise recommended in this module?",o:["Listing five moments in the last year when you felt genuinely capable and energised","Taking a certified personality exam","Asking a stranger to rate your abilities","Ranking yourself against a list of celebrities"],a:0},
+ {ao:"Strengths and Weaknesses",q:"What happens to a strength that is identified but never practised, according to this module?",o:["It automatically strengthens over time regardless of use","It fades, unlike a strength practised weekly, which compounds into visible skill","It transforms permanently into a weakness","It becomes illegal to use professionally"],a:1},
+ {ao:"Strengths and Weaknesses",q:"What two honest strategies does this module recommend for weaknesses that genuinely matter to your goals?",o:["Ignoring them completely or blaming others for them","Building minimum competence to avoid being blocked, or finding someone who covers what you don't excel at","Waiting indefinitely for the weakness to resolve itself","Abandoning the goal entirely rather than addressing the weakness"],a:1},
+
+ // ── Module 5: Goal Setting and Personal Growth (12) ──
+ {ao:"Goal Setting and Personal Growth",q:"What distinguished Oprah Winfrey's approach when she moved to Chicago in 1984?",o:["She focused purely on short-term ratings with no larger plan","She held a vivid vision and purpose, then built a structured personal development plan with SMART milestones","She copied the exact strategy of a competing talk show host","She avoided setting any specific, measurable goals to stay flexible"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"What specific goals did Oprah document with clarity, according to this module?",o:["National syndication, full creative ownership, and a platform that uplifted human consciousness","Winning a single industry award within one year","Reducing her show's production costs","Expanding into an unrelated retail business"],a:0},
+ {ao:"Goal Setting and Personal Growth",q:"How does this module distinguish vision from purpose?",o:["They are identical concepts with no real difference","Vision is a vivid picture of the future you're working toward; purpose is the deeper reason that future matters to you","Purpose only applies to professional goals, not personal ones","Vision is always more important than purpose"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"Which of the following correctly completes the SMART goal framework as described in this module?",o:["Specific, Measurable, Achievable, Relevant, Time-bound","Simple, Manageable, Attainable, Reasonable, Timely","Structured, Motivational, Ambitious, Realistic, Tracked","Sequential, Measured, Agreed, Ranked, Tested"],a:0},
+ {ao:"Goal Setting and Personal Growth",q:"According to this module, what is the difference between \"I want to be successful\" and a genuine SMART goal?",o:["There is no difference between the two statements","The SMART goal is trackable, with a specific, measurable outcome and a deadline, unlike the vague vision statement","Vague statements are always more motivating than SMART goals","SMART goals cannot include any timeline"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"What is a personal development plan, as defined in this module?",o:["A document connecting daily actions to SMART goals to a larger vision across all time horizons","A single isolated goal with no connection to anything else","A financial budget for personal expenses","A resume used for job applications only"],a:0},
+ {ao:"Goal Setting and Personal Growth",q:"What happens when one layer of the vision-goals-daily-action system is missing, according to this module?",o:["The system works exactly the same regardless","It collapses into either aimless daily activity or an inspiring vision with no practical path forward","It automatically becomes more efficient","Nothing changes since all layers are optional"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"What does 'reverse-engineering' a goal mean, according to this module?",o:["Abandoning a goal once it becomes difficult to achieve","Starting from the desired end state and breaking it down into yearly, then monthly, then weekly actions","Copying someone else's exact daily schedule without adaptation","Setting a goal without any defined timeline at all"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"How does this module define 'systematic growth' in contrast to random luck?",o:["Systematic growth is identical to random luck with a different name","Systematic growth is repeatable and cumulative, built from a clear vision, SMART goals, and a connecting development plan","Random luck is always more reliable than a systematic approach","Systematic growth requires no planning of any kind"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"What specific technique did Oprah use when planning her show's episodes, according to this module?",o:["Planning episodes randomly with no larger structure","Planning every episode backward from her ultimate purpose","Copying episode formats from competing shows exactly","Avoiding any planning to preserve spontaneity"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"Which test should a goal be checked against to confirm it is genuinely 'measurable', according to this module?",o:["Whether it sounds impressive to other people","Whether you would actually know, objectively, if you had achieved it","Whether it can be completed within a single day","Whether it requires financial investment"],a:1},
+ {ao:"Goal Setting and Personal Growth",q:"By what year was The Oprah Winfrey Show broadcast nationally, according to this module's case study?",o:["1984","1986","1990","2000"],a:1},
+
+ // ── Module 6: Communication and Relationships (12) ──
+ {ao:"Communication and Relationships",q:"What specific challenge did Nelson Mandela face heading into the CODESA negotiations, according to this module?",o:["A lack of any public support for a political transition","Having to communicate effectively and build trust with the very people who had imprisoned him, amid deep national distrust","No real disagreement existed between the negotiating parties","A purely economic dispute with no political dimension involved"],a:1},
+ {ao:"Communication and Relationships",q:"How long had Mandela been imprisoned before the CODESA negotiations began, according to this module?",o:["7 years","17 years","27 years","37 years"],a:2},
+ {ao:"Communication and Relationships",q:"What did Mandela and de Klerk both receive as a result of the peaceful democratic transition?",o:["A joint business award","The Nobel Peace Prize in 1993","An honorary military rank","A shared academic degree"],a:1},
+ {ao:"Communication and Relationships",q:"What is the key difference between a 'position' and an 'interest' in conflict resolution, as described in this module?",o:["They are the same thing with different names","A position is what someone is asking for; an interest is the deeper need underneath that request","Interests only apply to international diplomacy, not personal conflicts","Positions are always more important to address than interests"],a:1},
+ {ao:"Communication and Relationships",q:"What does active listening specifically involve, according to this module?",o:["Waiting silently for your turn to speak without any response","Fully focusing on, understanding, and demonstrating understanding of what someone said before responding","Interrupting to correct inaccuracies as quickly as possible","Avoiding eye contact to reduce social pressure"],a:1},
+ {ao:"Communication and Relationships",q:"According to this module, what often 'leaks' into a difficult conversation if left unaddressed?",o:["Unrelated financial concerns only","Unresolved anger or emotional trauma, affecting tone, word choice and patience","A person's native language ability","The physical location of the conversation"],a:1},
+ {ao:"Communication and Relationships",q:"What did Mandela do regarding his own trauma during the negotiations, according to this module?",o:["He ignored it and pretended it did not exist","He regulated it and set it aside during the negotiation itself, without denying it existed","He used it to justify aggressive tactics against de Klerk","He allowed it to dominate every exchange with de Klerk"],a:1},
+ {ao:"Communication and Relationships",q:"What does this module say ultimately determines whether a relationship is healthy?",o:["The absence of any disagreements at all","Whether both sides trust that hard conversations will be handled with honesty, respect and a genuine search for shared ground","The length of time the relationship has existed","Whether both people share identical opinions on every topic"],a:1},
+ {ao:"Communication and Relationships",q:"What practical step does this module recommend before a difficult conversation?",o:["Avoiding all preparation to stay spontaneous","Writing down the other person's stated position, then identifying your best guess at their underlying interest","Preparing a list of the other person's past mistakes","Deciding in advance that compromise is impossible"],a:1},
+ {ao:"Communication and Relationships",q:"What specific active-listening habit does this module recommend using during a disagreement?",o:["Changing the subject as quickly as possible","Saying back what you heard in your own words and asking if you understood correctly","Repeating your own position louder","Ending the conversation immediately if it becomes tense"],a:1},
+ {ao:"Communication and Relationships",q:"What does this module identify as the ultimate factor determining someone's quality of life?",o:["Financial wealth alone","The quality of their relationships","The number of professional achievements attained","Physical fitness levels"],a:1},
+ {ao:"Communication and Relationships",q:"Why does this module argue effective communication is not primarily about 'speaking well'?",o:["Because speaking is unimportant in all communication","Because it is really about ensuring the intended meaning is accurately received by the other person, and vice versa","Because listening is entirely unnecessary for communication","Because effective communication requires no language skill at all"],a:1},
+
+ // ── Module 7: Leadership and Influence (12) ──
+ {ao:"Leadership and Influence",q:"What made Admiral Stockdale's leadership over the other prisoners possible, according to this module?",o:["His formal military rank, which his captors respected","His consistent character and self-set standards, since he had no real authority to enforce compliance","A system of material rewards he could offer the other prisoners","Direct support from an external negotiating government"],a:1},
+ {ao:"Leadership and Influence",q:"How long did Admiral Stockdale spend in the prison camp, according to this module?",o:["Two years","Seven years","Fifteen years","Twenty years"],a:1},
+ {ao:"Leadership and Influence",q:"What choice did Stockdale make when offered early release for propaganda purposes?",o:["He accepted immediately to escape further torture","He refused, choosing to stay in prison with his men and endure more torture to protect his integrity","He negotiated for a reduced sentence instead","He asked his men to decide on his behalf"],a:1},
+ {ao:"Leadership and Influence",q:"What is the 'Stockdale Paradox' as defined in this module?",o:["Believing everything will resolve itself without any personal action","Holding unwavering faith in eventual success while confronting the brutal facts of the current reality without flinching","Refusing to acknowledge difficult facts in order to maintain morale","A purely pessimistic outlook with no belief in improvement"],a:1},
+ {ao:"Leadership and Influence",q:"According to this module, when is personal integrity actually tested most sharply?",o:["Only in public situations where others are watching","In private or unwitnessed moments, when compromising would cost nothing observable to others","Only during formal negotiations with high stakes","Integrity cannot really be tested, only claimed"],a:1},
+ {ao:"Leadership and Influence",q:"What does this module identify as the essence of personal leadership?",o:["Taking ownership of your own thoughts, choices and standards regardless of formal authority","Requiring a job title before any leadership is possible","Controlling other people's decisions directly","Avoiding responsibility whenever a situation is difficult"],a:0},
+ {ao:"Leadership and Influence",q:"What question does this module suggest for sound decision-making under genuine pressure?",o:["\"What gets me out of discomfort the fastest?\"","\"What choice can I live with and still respect myself for, regardless of the short-term cost?\"","\"What would minimise any personal effort required?\"","\"What decision would attract the most public attention?\""],a:1},
+ {ao:"Leadership and Influence",q:"What did Stockdale demand from his men above all else, according to this module?",o:["Blind optimism with no acknowledgment of danger","Facing the brutal facts honestly, avoiding self-pity, and taking full accountability for what was within their control","Complete silence and no communication of any kind","Individual survival strategies with no group cohesion"],a:1},
+ {ao:"Leadership and Influence",q:"What does 'total accountability', as described in this module, NOT mean?",o:["Owning the outcomes of your own choices","Blaming yourself for things entirely outside your control, such as being captured in the first place","Taking responsibility for what was within your control","A trait Stockdale demanded from his men"],a:1},
+ {ao:"Leadership and Influence",q:"Why does blind optimism without acknowledging reality tend to fail, according to this module?",o:["It never fails under any circumstances","It tends to collapse the moment reality intrudes, unlike the Stockdale Paradox's balance of faith and realism","Optimism is always the correct approach regardless of context","It is identical to the Stockdale Paradox with no distinction"],a:1},
+ {ao:"Leadership and Influence",q:"What is the practical two-column exercise this module recommends for facing a serious setback?",o:["Listing only positive outcomes while ignoring problems","Listing the brutal facts of the situation in one column and the concrete reasons for hope in the other","Listing every person responsible for the setback","Avoiding any written reflection on the setback"],a:1},
+ {ao:"Leadership and Influence",q:"According to this module, where can someone practise 'leading without formal authority' in everyday life?",o:["Only within a formal military command structure","In small, everyday settings like a team project, friend group, or family, by setting a visible standard through conduct","Nowhere, since leadership requires an official title","Only in situations involving extreme danger"],a:1},
+
+ // ── Module 8: Final Project — Personal Growth Portfolio (12) ──
+ {ao:"Final Project",q:"What transformed the professional's career trajectory in this module's case study?",o:["A random promotion with no clear cause","Systematically building and sharing a comprehensive Personal Growth Portfolio synthesising their self-awareness work","Switching to a completely unrelated career field","Avoiding any formal review of their progress"],a:1},
+ {ao:"Final Project",q:"According to this module, what should the Personal Growth Portfolio's sections be built from?",o:["Generic templates unrelated to the learner's own life","The learner's own completed exercises and reflections from each of the course's earlier modules","A single, isolated reflection written in one sitting with no other input","Someone else's completed portfolio, copied directly"],a:1},
+ {ao:"Final Project",q:"What is included in the portfolio's self-awareness foundation section, according to this module?",o:["A list of unrelated hobbies","A short, honest statement of current reality, including at least one blind spot identified through outside feedback","A financial statement of personal assets","A list of favourite books with no connection to self-reflection"],a:1},
+ {ao:"Final Project",q:"What does the portfolio's emotional intelligence section require, according to this module?",o:["A list of favourite emotions with no further detail","Common emotional triggers, accompanying patterns, and a specific regulation technique being practised","A record of every emotion felt in the past year","An analysis of someone else's emotional patterns instead of your own"],a:1},
+ {ao:"Final Project",q:"What does the portfolio's strengths-and-weaknesses section require, according to this module?",o:["A list of strengths only, with weaknesses excluded entirely","Two or three genuine strengths with a weekly habit for each, plus key weaknesses with an honest management strategy","A ranked comparison against other people's strengths","A single strength with no supporting habit or plan"],a:1},
+ {ao:"Final Project",q:"What must the portfolio's development-plan section include, according to this module?",o:["A vision statement, purpose, and this year's SMART goals reverse-engineered into weekly actions","Only a list of past achievements with no forward planning","A five-year plan with no connection to purpose or vision","A generic goal template with no personalisation"],a:0},
+ {ao:"Final Project",q:"What does the portfolio's communication-and-relationships section reflect, according to this module?",o:["A list of all personal contacts","One significant relationship or recurring conflict, analysed using the position-versus-interest framework","A ranking of friends by closeness","An unrelated communication theory with no personal application"],a:1},
+ {ao:"Final Project",q:"What does the portfolio's leadership-and-influence section require, according to this module?",o:["Proof of holding an official leadership title","An example of personal leadership exercised without formal authority, plus your own written Stockdale Paradox applied to a real challenge","A resume of past job titles held","A description of someone else's leadership style"],a:1},
+ {ao:"Final Project",q:"What happened when the professional in the case study shared their portfolio with executive mentors?",o:["It was dismissed as irrelevant to their career","The board was impressed by the depth of reflection and appointed them to lead an international project office within three months","They were asked to revise it repeatedly with no outcome","It had no effect on their career progression"],a:1},
+ {ao:"Final Project",q:"How many core sections make up the Personal Growth Portfolio described in this module?",o:["Three","Five","Seven","Ten"],a:2},
+ {ao:"Final Project",q:"What is the module's final message about the purpose of the portfolio?",o:["It must be perfect and finished before it has any value","It should be honest, specific, and revisited as ongoing growth continues, rather than a one-time finished product","It has no practical value beyond the course itself","It should be kept permanently private and never shared with anyone"],a:1},
+ {ao:"Final Project",q:"According to this module, what is the overall effect of assembling all seven sections into one coherent document?",o:["It has no more value than the separate exercises alone","It turns a series of good reflections into genuine, demonstrable proof of readiness to grow and lead","It only serves as a formality with no real substance","It replaces the need to actually apply any of the course's lessons"],a:1},
+];
+
 const SJOURNEYS_BASE={
  "SOC10T1":{code:"0495",subject:"Sociology",group:"Sociology (0495)",cat:"Cambridge",year:"Year 10",term:1,termLabel:"1st Term",
    title:"Sociology Year 10 \u00B7 Term 1: Research Methods",
@@ -7748,7 +8130,12 @@ const SJOURNEYS_BASE={
    title:"WhatsApp Automation: A Step-by-Step Guide to Automating Responses on WhatsApp",
    tagline:"15 weeks of hands-on WhatsApp Business automation \u2014 profiles, quick replies, FAQs, workflows, chatbots, integrations and marketing \u2014 told through real case studies.",
    months:"about 15 weeks",passMark:75,totalQuestions:100,examMins:60,
-   units:WA_UNITS,questions:WA_Q}
+   units:WA_UNITS,questions:WA_Q},
+ "SAM":{code:"SAM",subject:"Self-Awareness Mastery",group:"General Courses",cat:"General Courses",year:"All years",term:1,termLabel:"8-week course",
+   title:"Self-Awareness Mastery",
+   tagline:"Understanding yourself for personal, academic and professional success \u2014 personality, emotional intelligence, strengths, goals, relationships and leadership, told through real case studies.",
+   months:"about 8 weeks",passMark:75,totalQuestions:100,examMins:60,
+   units:SA_UNITS,questions:SA_Q}
 };
 
 
@@ -7816,6 +8203,20 @@ const ini=n=>(n||"?").split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
 const LANGS=["English","French","Spanish","Arabic","Igbo","Yoruba","Hausa","Mandarin","Portuguese","German","Italian","Dutch","Russian","Swahili","Afrikaans"];
 const TIMEZONES=["Africa/Lagos","Africa/Nairobi","Africa/Cairo","America/New_York","America/Los_Angeles","America/Chicago","Europe/London","Europe/Paris","Europe/Berlin","Asia/Dubai","Asia/Kolkata","Asia/Singapore","Asia/Tokyo","Australia/Sydney"];
 const COUNTRIES=["Nigeria","Ghana","Kenya","South Africa","United Kingdom","United States","Canada","France","Germany","UAE","India","Singapore","Australia","Egypt","Morocco"];
+// Professions offered to anyone registering as "Other Professional" — adults
+// outside the student/teacher/parent categories who want the General Courses
+// catalogue (WhatsApp Automation, Self-Awareness Mastery, etc.) for their own
+// professional development. "Other" is always the final catch-all option.
+const PROFESSIONS=["Accountant","Lawyer","Doctor","Nurse","Pharmacist","Dentist","Civil Engineer","Mechanical Engineer",
+ "Electrical Engineer","Software Engineer / Developer","Architect","Banker","Financial Analyst","Insurance Professional",
+ "Real Estate Agent","Human Resources Professional","Marketing Professional","Sales Professional","Graphic Designer",
+ "Journalist","Photographer","Videographer / Filmmaker","Chef / Caterer","Hospitality Manager","Event Planner",
+ "Fashion Designer","Interior Designer","Business Consultant","Entrepreneur / Business Owner","Project Manager",
+ "Data Analyst","Data Scientist","Cybersecurity Professional","Web Developer","Content Creator / Influencer",
+ "Social Media Manager","Public Relations Professional","Logistics / Supply Chain Professional","Farmer / Agriculturalist",
+ "Veterinarian","Pilot","Civil Servant","Security / Law Enforcement Professional","Military Personnel",
+ "Clergy / Religious Leader","Social Worker","Psychologist / Therapist","Fitness Trainer","Electrician",
+ "Plumber / Mechanic / Artisan","Other"];
 const PROFICIENCY=["Beginner","Intermediate","Advanced","Fluent","Native"];
 const MONTHLY_FEE=49.99, REF_PCT=0.10;
 
@@ -7903,7 +8304,7 @@ function mapProfileToUser(authUser, row){
     referredBy:row?.referred_by||null, children:row?.children||[],
     xp:row?.xp??0, level:row?.level??1, streak:row?.streak??0,
     badges:row?.badges||[], subjects:row?.subjects||[],
-    country:row?.country||"", currency:row?.currency||"USD",
+    country:row?.country||"", currency:row?.currency||"USD", profession:row?.profession||"",
     payoutMethod:row?.payout_method||"", payoutBankName:row?.payout_bank_name||"",
     payoutAccountNumber:row?.payout_account_number||"", payoutAccountName:row?.payout_account_name||"",
     payoutMobileProvider:row?.payout_mobile_provider||"", payoutMobileNumber:row?.payout_mobile_number||"",
@@ -8423,7 +8824,7 @@ export default function MindKlass(){
   const [forgotSent,setForgotSent]=useState(false);
   const [newPw1,setNewPw1]=useState("");
   const [newPw2,setNewPw2]=useState("");
-  const [su,setSu]=useState({name:"",nick:"",email:"",pass:"",role:"student",grade:"Year 9",ref:"",country:""});
+  const [su,setSu]=useState({name:"",nick:"",email:"",pass:"",role:"student",grade:"Year 9",ref:"",country:"",profession:""});
   const [vw,setVw]=useState(typeof window!=="undefined"?window.innerWidth:1024);
   const [err,setErr]=useState("");
   // Remember the last open section across a refresh, so reloading the page
@@ -8624,7 +9025,13 @@ export default function MindKlass(){
   // Remember the last open section across a refresh (see the tab state above).
   useEffect(()=>{try{sessionStorage.setItem("mk_tab",tab);}catch{}},[tab]);
   // Capture ?ref=CODE from a shared referral link and pre-fill the sign-up form.
-  useEffect(()=>{try{const p=new URLSearchParams(window.location.search);const r=p.get("ref");if(r){setSu(s=>({...s,ref:r.toUpperCase()}));setAuthMode("up");}}catch{}},[]);
+  // Capture ?ref=CODE from a shared referral link and pre-fill the sign-up
+  // form, but land on the normal Sign In / Create Account chooser (the
+  // default "in" tab) rather than forcing straight into registration —
+  // someone who already has an account should be able to just sign in.
+  // The referral code is remembered and applied automatically the moment
+  // they switch to Create Account.
+  useEffect(()=>{try{const p=new URLSearchParams(window.location.search);const r=p.get("ref");if(r){setSu(s=>({...s,ref:r.toUpperCase()}));}}catch{}},[]);
   useEffect(()=>{
     if(pg==="quiz"&&!qDone&&qTime>0){timerRef.current=setTimeout(()=>setQTime(t=>t-1),1000);}
     else if(pg==="quiz"&&!qDone&&qTime===0&&quiz){submitQuiz();}
@@ -8659,6 +9066,7 @@ export default function MindKlass(){
     durationLabel:r.duration_label, weeks:r.weeks, months:r.months,
     passMark:r.pass_mark, totalQuestions:r.total_questions, examMins:r.exam_mins,
     materials:[], units:r.units||[], questions:r.questions||[],
+    priceUSD:r.price_usd||0, paymentLink:r.payment_link||"", paymentProvider:r.payment_provider||"",
     _dbId:r.id, _dbStatus:r.status,
   });
   const TRAININGS={...TRAININGS_BASE, ...Object.fromEntries(dbCourses.filter(r=>r.system==="trainings"&&r.status==="published").map(r=>[r.id,dbRowToCourse(r)]))};
@@ -8862,6 +9270,7 @@ export default function MindKlass(){
     if(!su.name.trim()||!su.email.trim()||!su.pass.trim()){setErr("Please fill in your name, email and password.");return;}
     if(su.pass.trim().length<6){setErr("Password must be at least 6 characters.");return;}
     if(!su.country){setErr("Please choose your country - it sets the currency used to show you fees and referral earnings.");return;}
+    if(su.role==="professional"&&!su.profession){setErr("Please choose your profession.");return;}
     const nick=su.nick.trim()||su.name.trim().split(" ")[0]+Math.floor(Math.random()*90+10);
     const enteredRef=(su.ref||"").trim().toUpperCase();
     const currency=currencyForCountry(su.country).code;
@@ -8872,7 +9281,7 @@ export default function MindKlass(){
     }
     const {data,error}=await supabase.auth.signUp({
       email:su.email.trim(),password:su.pass.trim(),
-      options:{data:{nick,role:su.role,ref_used:enteredRef,country:su.country,currency},emailRedirectTo:window.location.origin}
+      options:{data:{nick,role:su.role,ref_used:enteredRef,country:su.country,currency,profession:su.role==="professional"?su.profession:""},emailRedirectTo:window.location.origin}
     });
     if(error){setAuthBusy(false);setErr(error.message||"Couldn't create your account. Please try again.");return;}
     if(!data.session){
@@ -8888,7 +9297,7 @@ export default function MindKlass(){
     // Belt-and-suspenders: explicitly set country/currency on the profile row
     // now that we have an authenticated session, rather than relying solely
     // on the database trigger picking them up from the signup metadata.
-    await supabase.from("profiles").update({country:su.country,currency}).eq("id",data.user.id);
+    await supabase.from("profiles").update({country:su.country,currency,profession:su.role==="professional"?su.profession:null}).eq("id",data.user.id);
     const row=await fetchProfileRow(data.user.id);
     const mapped=mapProfileToUser(data.user,row);
     setUser(mapped);setUsers(p=>[...p,mapped]);
@@ -9414,7 +9823,7 @@ export default function MindKlass(){
   // + date registered (DDMM) + a 3-digit serial that counts up within that role bucket.
   // The same code is used as the referral code for everyone, and doubles as the student's
   // parent-access code, so it's naturally included in their referral link.
-  const roleCodeTag=r=>r==="parent"?"PR":(r==="student"||r==="visitor-student")?"ST":"PF";
+  const roleCodeTag=r=>r==="parent"?"PR":(r==="student"||r==="visitor-student")?"ST":r==="professional"?"OP":"PF";
   const genUserCode=(role,usersList)=>{
     const tag=roleCodeTag(role);
     const d=new Date();
@@ -9545,6 +9954,8 @@ export default function MindKlass(){
     duration_label:d.durationLabel||null, weeks:d.weeks?Number(d.weeks):null, months:d.months||null,
     pass_mark:Number(d.passMark)||75, total_questions:Number(d.totalQuestions)||100, exam_mins:Number(d.examMins)||60,
     units:d.units||[], questions:d.questions||[], status:d.status||"draft",
+    price_usd:d.priceUSD?Number(d.priceUSD):0, payment_link:(d.paymentLink||"").trim()||null,
+    payment_provider:(d.paymentProvider||"").trim()||null,
   });
   const saveDbCourse=async(draft,editId)=>{
     if(!draft.code?.trim()||!draft.title?.trim()||!draft.subject?.trim()){alert("Please fill in at least Code, Subject and Title before saving.");return false;}
@@ -9575,6 +9986,7 @@ export default function MindKlass(){
     title:"", tagline:"", durationLabel:"", weeks:"", months:"",
     passMark:75, totalQuestions:100, examMins:60,
     units:[], questions:[], status:"draft",
+    priceUSD:"", paymentLink:"", paymentProvider:"Selar",
   });
   const emptyUnitDraft=(n)=>({id:`u_${Date.now()}_${Math.random().toString(36).slice(2,7)}`,n,title:"",mins:60,icon:"BookOpen",summary:"",keyWords:[],sections:[],activity:"",check:[{q:"",o:["","","",""],a:0},{q:"",o:["","","",""],a:0},{q:"",o:["","","",""],a:0}]});
   const emptySectionDraft=()=>({art:"target",h:"",p:[""],ex:{t:"",b:[""]}});
@@ -9648,6 +10060,7 @@ export default function MindKlass(){
     teacher:[{id:"home",I:Home,l:"Home"},{id:"courses",I:ClipboardList,l:"My Classes"},{id:"training",I:GraduationCap,l:"Teacher's Course"},{id:"learn",I:BookMarked,l:"Student Subjects"},{id:"general",I:Layers,l:"General Courses"},{id:"assignments",I:ClipboardCheck,l:"Assignments"},{id:"attendance",I:CalendarCheck,l:"Attendance"},{id:"gradebook",I:BarChart2,l:"Gradebook"},{id:"behavior",I:Heart,l:"Behavior"},{id:"games",I:Gamepad2,l:"Game Hub"},{id:"quiz",I:FileText,l:"Assessments"},{id:"community",I:MessageSquare,l:"Community"},{id:"messages",I:Mail,l:"Messages"},{id:"meetings",I:Video,l:"Schedule"},{id:"whiteboard",I:PenLine,l:"Whiteboard"},{id:"refer",I:Share2,l:"Refer & Earn"},{id:"profile",I:User,l:"Profile"}],
     admin:[{id:"home",I:LayoutDashboard,l:"Dashboard"},{id:"users",I:Users,l:"Users"},{id:"approvals",I:ShieldCheck,l:"Course Approvals"},{id:"coursebuilder",I:Layers,l:"Course Builder"},{id:"exams",I:BarChart2,l:"Assessments"},{id:"training",I:GraduationCap,l:"Teacher's Course"},{id:"learn",I:BookMarked,l:"Student Subjects"},{id:"general",I:Layers,l:"General Courses"},{id:"attendance",I:CalendarCheck,l:"Attendance"},{id:"fees",I:CreditCard,l:"Fees & Billing"},{id:"push",I:BellRing,l:"Send Alerts"},{id:"games",I:Gamepad2,l:"Game Hub"},{id:"meetings",I:Video,l:"Meetings"},{id:"community",I:MessageSquare,l:"Community"},{id:"whiteboard",I:PenLine,l:"Whiteboard"},{id:"profile",I:User,l:"Profile"}],
     parent:[{id:"home",I:Home,l:"Home"},{id:"child",I:Baby,l:"My Child"},{id:"assignments",I:ClipboardCheck,l:"Homework"},{id:"gradebook",I:BarChart2,l:"Report Card"},{id:"behavior",I:Heart,l:"Behavior"},{id:"attendance",I:CalendarCheck,l:"Attendance"},{id:"fees",I:CreditCard,l:"Pay Fees"},{id:"messages",I:Mail,l:"Messages"},{id:"profile",I:User,l:"Profile"}],
+    professional:[{id:"home",I:Home,l:"Home"},{id:"general",I:Layers,l:"General Courses"},{id:"quiz",I:FileText,l:"Assessments"},{id:"community",I:MessageSquare,l:"Community"},{id:"messages",I:Mail,l:"Messages"},{id:"whiteboard",I:PenLine,l:"Whiteboard"},{id:"refer",I:Share2,l:"Refer & Earn"},{id:"profile",I:User,l:"Profile"}],
   };
   const nav=NAV[effRole]||[];
 
@@ -9870,6 +10283,7 @@ export default function MindKlass(){
         </div>
         <div style={{background:"white",borderRadius:22,padding:vw<480?18:26,boxShadow:"0 20px 60px rgba(0,0,0,.3)"}}>
           <div style={{display:"flex",gap:5,background:"#f0f5ff",borderRadius:12,padding:4,marginBottom:16}}>{tabBtn("in","Sign In")}{tabBtn("up","Create Account")}</div>
+          {su.ref&&authMode==="in"&&<div style={{background:"#f0fdf4",border:"1px solid #86efac",borderRadius:9,padding:"8px 12px",marginBottom:14,fontSize:11,color:"#059669",display:"flex",gap:6,alignItems:"center"}}><Share2 size={12}/>Referral code <strong>{su.ref}</strong> ready - already have an account? Sign in below, or switch to Create Account to use it.</div>}
           {err&&<div style={{background:"#fef2f2",border:"1px solid #fecaca",borderRadius:9,padding:"9px 13px",marginBottom:12,color:"#dc2626",fontSize:12,fontWeight:600,display:"flex",gap:6,alignItems:"center"}}><AlertTriangle size={13}/>{err}</div>}
           {authMode==="in"?(showForgot?<>
             {!forgotSent?<>
@@ -9890,9 +10304,10 @@ export default function MindKlass(){
             </div>
             <div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>Email Address</label><input style={fld} type="email" placeholder="your@email.com" value={su.email} onChange={e=>setSu(p=>({...p,email:e.target.value}))}/></div>
             <div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>Password (min 6 characters)</label><input style={fld} type="password" placeholder="Create a password" value={su.pass} onChange={e=>setSu(p=>({...p,pass:e.target.value}))}/></div>
-            <div style={{display:"grid",gridTemplateColumns:su.role==="student"?(vw<480?"1fr":"1fr 1fr"):"1fr",gap:9}}>
-              <div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>I am a...</label><select style={fld} value={su.role} onChange={e=>setSu(p=>({...p,role:e.target.value}))}><option value="student">Student</option><option value="teacher">Teacher</option><option value="parent">Parent</option></select></div>
+            <div style={{display:"grid",gridTemplateColumns:(su.role==="student"||su.role==="professional")?(vw<480?"1fr":"1fr 1fr"):"1fr",gap:9}}>
+              <div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>I am a...</label><select style={fld} value={su.role} onChange={e=>setSu(p=>({...p,role:e.target.value}))}><option value="student">Student</option><option value="teacher">Teacher</option><option value="parent">Parent</option><option value="professional">Other Professional</option></select></div>
               {su.role==="student"&&<div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>Year Level</label><select style={fld} value={su.grade} onChange={e=>setSu(p=>({...p,grade:e.target.value}))}>{YEAR_LEVELS.map(g=><option key={g} value={g}>{g}</option>)}</select></div>}
+              {su.role==="professional"&&<div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>Profession</label><select style={fld} value={su.profession} onChange={e=>setSu(p=>({...p,profession:e.target.value}))}><option value="">- Select your profession -</option>{PROFESSIONS.map(p=><option key={p} value={p}>{p}</option>)}</select></div>}
             </div>
             <div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>Country (sets your currency)</label><select style={fld} value={su.country} onChange={e=>setSu(p=>({...p,country:e.target.value}))}><option value="">- Select your country -</option>{COUNTRIES.map(c=><option key={c} value={c}>{c} ({currencyForCountry(c).code})</option>)}</select></div>
             <div style={{marginBottom:9}}><label style={{...lbl,color:"#64748b"}}>Referral Code (optional)</label><input style={fld} placeholder="e.g. MKST0507001" value={su.ref} onChange={e=>setSu(p=>({...p,ref:e.target.value.toUpperCase()}))}/></div>
@@ -10104,7 +10519,7 @@ export default function MindKlass(){
         {!viewingOther&&<div style={{...card,marginBottom:12}}>
           <h3 style={{fontSize:12,fontWeight:800,color:T.head,margin:"0 0 10px",display:"flex",alignItems:"center",gap:5}}><FileText size={13} color="#1842a8"/>Registration Details</h3>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"6px 12px"}}>
-            {[u?.dob&&{l:"Date of Birth",v:u.dob},u?.gender&&{l:"Gender",v:u.gender},u?.primaryLanguage&&{l:"Primary Language",v:u.primaryLanguage},u?.studentId&&{l:"Student ID",v:u.studentId},u?.guardianName&&{l:"Guardian",v:u.guardianName},u?.staffId&&{l:"Staff ID",v:u.staffId},u?.department&&{l:"Department",v:u.department},u?.experience&&{l:"Experience",v:`${u.experience} yrs`},u?.qualifications&&{l:"Qualifications",v:u.qualifications},u?.nationality&&{l:"Nationality",v:u.nationality},u?.country&&{l:"Country",v:u.country},u?.city&&{l:"City",v:u.city},u?.timezone&&{l:"Time Zone",v:u.timezone},u?.nativeLang&&{l:"Native Language",v:u.nativeLang},u?.linkedin&&{l:"LinkedIn",v:u.linkedin},u?.phone&&{l:"Phone",v:u.phone},u?.jobTitle&&{l:"Job Title",v:u.jobTitle}].filter(Boolean).map((f,i)=>(<div key={i} style={{padding:"7px 9px",borderRadius:8,background:T.alt}}><div style={{fontSize:9,fontWeight:700,color:T.muted,textTransform:"uppercase",letterSpacing:.4,marginBottom:2}}>{f.l}</div><div style={{fontSize:11,color:T.txt,fontWeight:600,wordBreak:"break-all"}}>{f.v}</div></div>))}
+            {[u?.dob&&{l:"Date of Birth",v:u.dob},u?.gender&&{l:"Gender",v:u.gender},u?.primaryLanguage&&{l:"Primary Language",v:u.primaryLanguage},u?.studentId&&{l:"Student ID",v:u.studentId},u?.guardianName&&{l:"Guardian",v:u.guardianName},u?.staffId&&{l:"Staff ID",v:u.staffId},u?.department&&{l:"Department",v:u.department},u?.experience&&{l:"Experience",v:`${u.experience} yrs`},u?.qualifications&&{l:"Qualifications",v:u.qualifications},u?.nationality&&{l:"Nationality",v:u.nationality},u?.country&&{l:"Country",v:u.country},u?.city&&{l:"City",v:u.city},u?.timezone&&{l:"Time Zone",v:u.timezone},u?.nativeLang&&{l:"Native Language",v:u.nativeLang},u?.linkedin&&{l:"LinkedIn",v:u.linkedin},u?.phone&&{l:"Phone",v:u.phone},u?.jobTitle&&{l:"Job Title",v:u.jobTitle},u?.profession&&{l:"Profession",v:u.profession}].filter(Boolean).map((f,i)=>(<div key={i} style={{padding:"7px 9px",borderRadius:8,background:T.alt}}><div style={{fontSize:9,fontWeight:700,color:T.muted,textTransform:"uppercase",letterSpacing:.4,marginBottom:2}}>{f.l}</div><div style={{fontSize:11,color:T.txt,fontWeight:600,wordBreak:"break-all"}}>{f.v}</div></div>))}
           </div>
         </div>}
         {!viewingOther&&u?.role==="student"&&<div style={{...card,marginBottom:12}}>
@@ -10235,15 +10650,20 @@ export default function MindKlass(){
                 {[{I:Clock,l:j.months},{I:ListChecks,l:`${j.units.length} units`},{I:Target,l:`${j.totalQuestions} Q · ${j.examMins} min`},{I:Award,l:`${j.passMark}% to pass`}].map((chip,ci)=>(
                   <span key={ci} style={{display:"inline-flex",alignItems:"center",gap:4,fontSize:10.5,fontWeight:700,color:T.txt,background:T.alt,padding:"4px 9px",borderRadius:8}}><chip.I size={11} color="#1842a8"/>{chip.l}</span>
                 ))}
+                {j.priceUSD>0&&<span style={{display:"inline-flex",alignItems:"center",gap:4,fontSize:10.5,fontWeight:800,color:"#059669",background:"#dcfce7",padding:"4px 9px",borderRadius:8}}><CreditCard size={11}/>{fmtMoney(j.priceUSD,user?.currency)}</span>}
               </div>
               {approved&&<div style={{height:6,background:T.alt,borderRadius:99,overflow:"hidden"}}><div style={{height:"100%",width:`${Math.round(doneCount/j.units.length*100)}%`,background:"linear-gradient(90deg,#2158e8,#059669)",borderRadius:99}}/></div>}
+              {!approved&&j.priceUSD>0&&j.paymentLink&&(!app||app.status!=="pending")&&<div style={{background:T.alt,borderRadius:9,padding:"8px 10px",fontSize:10.5,color:T.muted,lineHeight:1.5}}>This is a paid course ({fmtMoney(j.priceUSD,user?.currency)}). Pay via {j.paymentProvider||"our payment link"}, then apply below — we'll verify your payment and approve access.</div>}
               {approved
                 ? <button onClick={()=>{setSjCourse(k);setSjView("course");}} style={{...bP,padding:"10px",fontSize:13,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}>{sub?"Review journey":doneCount>0?"Continue learning":"Start learning"}<ChevronRight size={14}/></button>
                 : app&&app.status==="pending"
                   ? <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:7,padding:"10px",borderRadius:10,background:"#fffbeb",border:"1px solid #fde68a",color:"#92400e",fontSize:12,fontWeight:800}}><Hourglass size={14}/>Waiting for approval</div>
-                  : app&&app.status==="rejected"
-                    ? <button onClick={()=>sjApply(k)} style={{...bO,padding:"10px",fontSize:13,color:"#dc2626",borderColor:"#fecaca",display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><Send size={13}/>Not approved · apply again</button>
-                    : <button onClick={()=>sjApply(k)} style={{...bP,padding:"10px",fontSize:13,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><Send size={13}/>Apply for this subject</button>}
+                  : <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+                      {j.priceUSD>0&&j.paymentLink&&<button onClick={()=>{try{window.open(j.paymentLink,"_blank","noopener");}catch{}}} style={{...bP,flex:1,minWidth:110,padding:"10px",fontSize:13,background:"linear-gradient(135deg,#059669,#16a34a)",display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><CreditCard size={13}/>Pay Now</button>}
+                      {app&&app.status==="rejected"
+                        ? <button onClick={()=>sjApply(k)} style={{...bO,flex:1,minWidth:110,padding:"10px",fontSize:13,color:"#dc2626",borderColor:"#fecaca",display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><Send size={13}/>Not approved · apply again</button>
+                        : <button onClick={()=>sjApply(k)} style={{...bP,flex:1,minWidth:110,padding:"10px",fontSize:13,display:"flex",alignItems:"center",justifyContent:"center",gap:6}}><Send size={13}/>Apply for this subject</button>}
+                    </div>}
             </div>;
           })}
         </div>
@@ -10667,6 +11087,14 @@ export default function MindKlass(){
             <h1 style={{fontSize:22,fontWeight:900,fontFamily:"Outfit,sans-serif",color:"#fff",margin:"0 0 6px",lineHeight:1.2}}>{c.title}</h1>
             <p style={{fontSize:13,color:"rgba(255,255,255,.8)",margin:0}}>{c.tagline}</p>
           </div>
+          {c.priceUSD>0&&c.paymentLink&&(!myApp||myApp.status!=="pending")&&<div style={{...card,marginBottom:14,borderTop:"4px solid #059669",display:"flex",alignItems:"center",gap:14,flexWrap:"wrap"}}>
+            <div style={{width:46,height:46,borderRadius:12,background:"#dcfce7",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><CreditCard size={22} color="#059669"/></div>
+            <div style={{flex:1,minWidth:200}}>
+              <div style={{fontSize:14,fontWeight:900,color:T.head,fontFamily:"Outfit,sans-serif"}}>Get This Course — {fmtMoney(c.priceUSD,user?.currency)}</div>
+              <div style={{fontSize:11.5,color:T.muted,lineHeight:1.5}}>Pay via {c.paymentProvider||"our payment link"}, then apply below — we'll verify your payment and approve access.</div>
+            </div>
+            <button onClick={()=>{try{window.open(c.paymentLink,"_blank","noopener");}catch{}}} style={{...bP,padding:"10px 18px",fontSize:13,background:"linear-gradient(135deg,#059669,#16a34a)",display:"flex",alignItems:"center",gap:6,flexShrink:0}}><CreditCard size={13}/>Pay Now</button>
+          </div>}
           <div style={{...card,textAlign:"center",padding:"30px 22px"}}>
             {!myApp&&<>
               <div style={{width:60,height:60,borderRadius:"50%",background:T.pale,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 14px"}}><Lock size={26} color="#1842a8"/></div>
@@ -11218,6 +11646,9 @@ export default function MindKlass(){
                     {[{I:ListChecks,l:`${uCount} unit${uCount===1?"":"s"}`},{I:FileText,l:`${qCount}/${row.total_questions} Q`},{I:Award,l:`${row.pass_mark}% to pass`},{I:Clock,l:`${row.exam_mins} min exam`}].map((chip,ci)=>(
                       <span key={ci} style={{display:"inline-flex",alignItems:"center",gap:4,fontSize:10.5,fontWeight:700,color:T.txt,background:T.alt,padding:"4px 9px",borderRadius:8}}><chip.I size={11} color="#1842a8"/>{chip.l}</span>
                     ))}
+                    {row.price_usd>0
+                      ? <span style={{display:"inline-flex",alignItems:"center",gap:4,fontSize:10.5,fontWeight:800,color:"#059669",background:"#dcfce7",padding:"4px 9px",borderRadius:8}}><CreditCard size={11}/>${Number(row.price_usd).toFixed(2)}{row.payment_provider?` · ${row.payment_provider}`:""}</span>
+                      : <span style={{display:"inline-flex",alignItems:"center",gap:4,fontSize:10.5,fontWeight:700,color:T.muted,background:T.alt,padding:"4px 9px",borderRadius:8}}>Free to apply</span>}
                   </div>
                   <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
                     <button onClick={()=>startEditCourse(row)} style={{...bO,flex:1,padding:"8px",fontSize:11.5}}><Edit2 size={11} style={{marginRight:3,verticalAlign:"middle"}}/>Edit</button>
@@ -11307,6 +11738,16 @@ export default function MindKlass(){
           <div style={{marginBottom:4}}><label style={lbl}>Exam Minutes</label><input type="number" value={d.examMins} onChange={e=>setCbDraft({...d,examMins:e.target.value})} style={inp}/></div>
         </div>
         <p style={{fontSize:10.5,color:T.muted,marginTop:8,marginBottom:0}}>Every existing MindKlass course uses <strong>75% pass mark, 100 questions, a 60-minute exam</strong> — keep these unless you have a specific reason to differ.</p>
+
+        <div style={{marginTop:16,paddingTop:14,borderTop:`1px solid ${T.line}`}}>
+          <div style={{fontSize:12,fontWeight:800,color:T.head,marginBottom:8,display:"flex",alignItems:"center",gap:6}}><CreditCard size={13}/>Pricing & Payment</div>
+          <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr 1fr",gap:"0 14px"}}>
+            <div style={{marginBottom:4}}><label style={lbl}>Price (USD)</label><input type="number" min="0" step="0.01" placeholder="0 = free" value={d.priceUSD} onChange={e=>setCbDraft({...d,priceUSD:e.target.value})} style={inp}/></div>
+            <div style={{marginBottom:4}}><label style={lbl}>Payment Provider</label><select value={d.paymentProvider} onChange={e=>setCbDraft({...d,paymentProvider:e.target.value})} style={inp}><option>Selar</option><option>Paystack</option><option>Flutterwave</option><option>Stripe</option><option>Other</option></select></div>
+            <div style={{marginBottom:4}}><label style={lbl}>Payment Link</label><input placeholder="e.g. https://selar.co/your-product" value={d.paymentLink} onChange={e=>setCbDraft({...d,paymentLink:e.target.value})} style={inp}/></div>
+          </div>
+          <p style={{fontSize:10.5,color:T.muted,marginTop:8,marginBottom:0}}>Paste the checkout link from Selar (or any provider — Paystack, Flutterwave, Stripe) for this course. Leave the price at 0 to keep this course free-to-apply. When a price is set, learners see a "Get This Course" card with a Pay Now button before they apply for access — you'll still need to verify payment and approve their application as usual.</p>
+        </div>
       </div>}
 
       {cbStep==="units"&&cbUnitIdx===null&&<div>
@@ -11915,7 +12356,126 @@ export default function MindKlass(){
     </>});
   }
 
+  if(effRole==="professional"){
+    const generalCourses=Object.entries(SJOURNEYS).filter(([,j])=>j.cat==="General Courses");
+    return ML({children:<>
+      <div style={{marginBottom:12}}><ConnectionBar sync={sync} T={T}/></div>
+      <div style={{marginBottom:18}}><h1 style={{fontSize:22,fontWeight:900,fontFamily:"Outfit,sans-serif",color:T.head,margin:"0 0 3px"}}>Good {new Date().getHours()<12?"Morning":"Afternoon"}, {user?.nick}</h1><p style={{color:T.muted,fontSize:12,margin:0}}>{user?.profession?`${user.profession} - `:""}Grow your skills with MindKlass's General Courses.</p></div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(130px,1fr))",gap:9,marginBottom:15}}>
+        {[{l:"Courses Available",v:generalCourses.length,I:Layers,c:"#1842a8",t:"general"},{l:"Assessments",v:[...new Set(QBANK.map(q=>q.sub))].length,I:FileText,c:"#7c3aed",t:"quiz"},{l:"My Referrals",v:myRefs.length,I:Share2,c:"#059669",t:"refer"},{l:"Alerts",v:unreadCount(),I:Bell,c:"#d97706",t:null}].map(s=>(<div key={s.l} onClick={()=>s.t?setTab(s.t):setNotifOpen(true)} style={{...card,textAlign:"center",padding:13,cursor:"pointer"}}><s.I size={18} color={s.c} style={{margin:"0 auto 3px",display:"block"}}/><div style={{fontSize:19,fontWeight:900,color:s.c,fontFamily:"Outfit,sans-serif"}}>{s.v}</div><div style={{fontSize:9,color:T.muted}}>{s.l}</div></div>))}
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))",gap:12}}>
+        <div style={card}>
+          <h3 style={{fontSize:13,fontWeight:800,color:T.head,margin:"0 0 10px",display:"flex",alignItems:"center",gap:5}}><Layers size={13} color="#1842a8"/>General Courses</h3>
+          {generalCourses.length===0&&<p style={{fontSize:12,color:T.muted,margin:0}}>No courses published yet - check back soon.</p>}
+          {generalCourses.slice(0,4).map(([k,j])=>(<div key={k} onClick={()=>setTab("general")} style={{display:"flex",gap:8,alignItems:"center",padding:"8px 0",borderBottom:`1px solid ${T.border}`,cursor:"pointer"}}><div style={{width:30,height:30,borderRadius:8,background:T.pale,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Layers size={14} color="#1842a8"/></div><div style={{flex:1,minWidth:0}}><div style={{fontSize:11,fontWeight:700,color:T.txt,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{j.title}</div><div style={{fontSize:9,color:T.muted}}>{j.termLabel}</div></div><ChevronRight size={13} color={T.muted}/></div>))}
+          <button onClick={()=>setTab("general")} style={{...bP,width:"100%",marginTop:10,padding:"7px",fontSize:11}}>Browse All Courses<ChevronRight size={11} style={{marginLeft:2,verticalAlign:"middle"}}/></button>
+        </div>
+        <div style={card}><h3 style={{fontSize:13,fontWeight:800,color:T.head,margin:"0 0 10px",display:"flex",alignItems:"center",gap:5}}><Zap size={13} color="#1842a8"/>Quick Actions</h3><div style={{display:"flex",flexDirection:"column",gap:5}}>
+          <button onClick={()=>setTab("general")} style={{background:"#1842a814",border:"none",borderRadius:8,padding:"9px 12px",cursor:"pointer",textAlign:"left",fontSize:11,fontWeight:700,color:"#1842a8",display:"flex",alignItems:"center",gap:6}}><Layers size={12}/>Browse General Courses</button>
+          <button onClick={()=>setTab("community")} style={{background:"#7c3aed14",border:"none",borderRadius:8,padding:"9px 12px",cursor:"pointer",textAlign:"left",fontSize:11,fontWeight:700,color:"#7c3aed",display:"flex",alignItems:"center",gap:6}}><MessageSquare size={12}/>Visit Community</button>
+          <button onClick={()=>setTab("whiteboard")} style={{background:"#d9770614",border:"none",borderRadius:8,padding:"9px 12px",cursor:"pointer",textAlign:"left",fontSize:11,fontWeight:700,color:"#d97706",display:"flex",alignItems:"center",gap:6}}><PenLine size={12}/>Open Whiteboard</button>
+          <button onClick={()=>setTab("refer")} style={{background:"#05966914",border:"none",borderRadius:8,padding:"9px 12px",cursor:"pointer",textAlign:"left",fontSize:11,fontWeight:700,color:"#059669",display:"flex",alignItems:"center",gap:6}}><Share2 size={12}/>Refer & Earn 10%</button>
+        </div></div>
+      </div>
+    </>});
+  }
+
   return null;
+}
+
+// ============================================================================
+//  INSTALL PROMPT — "Add MindKlass to your Home Screen / Desktop"
+// ============================================================================
+// Rendered as a sibling of <MindKlass/> in main.jsx (not nested inside it) so
+// it floats above every page — login, dashboard, exam, everything — without
+// having to thread it through the app's many separate return statements.
+// Chrome/Edge/Android fire "beforeinstallprompt"; iOS Safari never does, so it
+// gets its own manual "tap Share, then Add to Home Screen" instructions.
+// A localStorage timestamp stops it from nagging: dismiss it and it stays
+// quiet for 14 days, or forever once the app is actually installed.
+const MK_INSTALL_DISMISS_KEY="mk_install_dismissed_at";
+const MK_INSTALL_DONE_KEY="mk_install_completed";
+const MK_INSTALL_SNOOZE_DAYS=14;
+export function InstallPrompt(){
+  const [visible,setVisible]=useState(false);
+  const [platform,setPlatform]=useState(null); // "prompt" (Android/desktop Chrome) | "ios"
+  const deferredRef=useRef(null);
+
+  useEffect(()=>{
+    try{
+      const standalone=window.matchMedia?.("(display-mode: standalone)")?.matches || window.navigator.standalone===true;
+      if(standalone){ localStorage.setItem(MK_INSTALL_DONE_KEY,"1"); return; }
+      if(localStorage.getItem(MK_INSTALL_DONE_KEY)==="1") return;
+      const dismissedAt=Number(localStorage.getItem(MK_INSTALL_DISMISS_KEY)||0);
+      const snoozed=dismissedAt&&(Date.now()-dismissedAt)<MK_INSTALL_SNOOZE_DAYS*24*60*60*1000;
+      if(snoozed) return;
+
+      const onBeforeInstall=(e)=>{
+        e.preventDefault();
+        deferredRef.current=e;
+        setPlatform("prompt");
+        setTimeout(()=>setVisible(true),1800);
+      };
+      window.addEventListener("beforeinstallprompt",onBeforeInstall);
+
+      const onInstalled=()=>{
+        try{localStorage.setItem(MK_INSTALL_DONE_KEY,"1");}catch{}
+        setVisible(false);
+      };
+      window.addEventListener("appinstalled",onInstalled);
+
+      // iOS Safari never fires beforeinstallprompt, so detect it directly and
+      // show the manual instructions instead, once the page has settled.
+      const ua=window.navigator.userAgent||"";
+      const isIOS=/iphone|ipad|ipod/i.test(ua) && !window.MSStream;
+      let iosTimer;
+      if(isIOS){
+        iosTimer=setTimeout(()=>{ setPlatform("ios"); setVisible(true); },1800);
+      }
+      return ()=>{
+        window.removeEventListener("beforeinstallprompt",onBeforeInstall);
+        window.removeEventListener("appinstalled",onInstalled);
+        if(iosTimer) clearTimeout(iosTimer);
+      };
+    }catch{}
+  },[]);
+
+  const dismiss=()=>{
+    try{localStorage.setItem(MK_INSTALL_DISMISS_KEY,String(Date.now()));}catch{}
+    setVisible(false);
+  };
+  const install=async()=>{
+    const ev=deferredRef.current;
+    if(!ev) return;
+    ev.prompt();
+    try{ await ev.userChoice; }catch{}
+    deferredRef.current=null;
+    setVisible(false);
+    try{localStorage.setItem(MK_INSTALL_DISMISS_KEY,String(Date.now()));}catch{}
+  };
+
+  if(!visible||!platform) return null;
+  return (
+    <div style={{position:"fixed",left:0,right:0,bottom:0,zIndex:1000,display:"flex",justifyContent:"center",padding:"0 14px 14px",fontFamily:"Nunito,sans-serif"}}>
+      <div style={{width:"100%",maxWidth:440,background:"linear-gradient(135deg,#0d1f4b,#1842a8)",borderRadius:16,padding:"14px 16px",boxShadow:"0 12px 40px rgba(0,0,0,.35)",display:"flex",gap:12,alignItems:"flex-start",color:"white"}}>
+        <div style={{width:40,height:40,borderRadius:11,background:"rgba(255,255,255,.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+          <Download size={18} color="white"/>
+        </div>
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{fontWeight:800,fontSize:13,fontFamily:"Outfit,sans-serif",marginBottom:2}}>Install MindKlass</div>
+          {platform==="ios"
+            ? <p style={{margin:0,fontSize:11.5,opacity:.9,lineHeight:1.5}}>Add MindKlass to your Home Screen for quick, full-screen access: tap the <strong>Share</strong> icon below, then choose <strong>"Add to Home Screen."</strong></p>
+            : <p style={{margin:0,fontSize:11.5,opacity:.9,lineHeight:1.5}}>Add MindKlass to your home screen or desktop for one-tap access, just like a native app.</p>}
+          <div style={{display:"flex",gap:8,marginTop:10}}>
+            {platform==="prompt"&&<button onClick={install} style={{background:"white",color:"#0d1f4b",border:"none",borderRadius:9,padding:"7px 14px",fontSize:12,fontWeight:800,cursor:"pointer",display:"flex",alignItems:"center",gap:5}}><Download size={12}/>Install</button>}
+            <button onClick={dismiss} style={{background:"rgba(255,255,255,.12)",color:"white",border:"1px solid rgba(255,255,255,.25)",borderRadius:9,padding:"7px 14px",fontSize:12,fontWeight:700,cursor:"pointer"}}>{platform==="ios"?"Got it":"Not now"}</button>
+          </div>
+        </div>
+        <button onClick={dismiss} aria-label="Dismiss" style={{background:"none",border:"none",color:"rgba(255,255,255,.6)",cursor:"pointer",padding:2,flexShrink:0}}><X size={15}/></button>
+      </div>
+    </div>
+  );
 }
 
 // ---------- TrainArt: small animated SVG illustrations for training sections ----------

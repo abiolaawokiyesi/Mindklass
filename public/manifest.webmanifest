@@ -1,0 +1,16 @@
+{
+  "name": "MindKlass - Live Ideally",
+  "short_name": "MindKlass",
+  "description": "MindKlass — Cambridge IGCSE online learning, teacher certification, and professional development platform.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#0d1f4b",
+  "theme_color": "#0d1f4b",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/MINDKLASS_LOGO_2.png", "sizes": "256x256", "type": "image/png", "purpose": "maskable" }
+  ]
+}

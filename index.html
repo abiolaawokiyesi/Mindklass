@@ -9,6 +9,14 @@
       name="description"
       content="MindKlass — Cambridge IGCSE online learning and teacher certification platform. Live Ideally."
     />
+    <!-- PWA install support: manifest for Chrome/Edge/Android's native
+         "Add to Home Screen"/beforeinstallprompt flow, plus the Apple-specific
+         meta tags iOS Safari needs since it never fires beforeinstallprompt. -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="MindKlass" />
     <title>MindKlass · Live Ideally</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
