@@ -10896,7 +10896,20 @@ export default function MindKlass(){
   // That made a newly-opened page look "stuck" wherever you'd last scrolled
   // to (or made a short page like Attendance look like it didn't open at all,
   // if you'd been scrolled down a long page beforehand).
-  useEffect(()=>{mainScrollRef.current?.scrollTo(0,0);},[tab,pg]);
+  // Beyond the top-level tab/page, a lot of "opening a new screen" actually
+  // happens *inside* the same tab — drilling into a course, a specific unit,
+  // an assessment, someone's profile, a course-builder step, a DM thread.
+  // Each of those is its own state variable below, so this needs to reset
+  // scroll on all of them too, not just on tab/pg, or the new screen opens
+  // wherever the previous one happened to be scrolled to.
+  useEffect(()=>{mainScrollRef.current?.scrollTo(0,0);},[
+    tab,pg,
+    trView,trCourse,trUnit,
+    sjView,sjCourse,sjUnit,
+    viewProfileId,
+    cbView,cbStep,cbUnitIdx,
+    selDM,chan,selLesson,examSub,
+  ]);
   // Training certification assessment timer
   useEffect(()=>{
     if(tab==="training"&&trView==="assess"&&trAStarted&&trATime>0){trTimerRef.current=setTimeout(()=>setTrATime(t=>t-1),1000);}
@@ -11827,17 +11840,36 @@ export default function MindKlass(){
     await pushNotify("New behaviour note","A teacher logged an update about your child.","announcement","parent",false);
     setBehModal(false); setNewBeh({studentId:null,type:"positive",note:""});
   };
-  // pay a fee (simulated secure gateway)
-  // Mark a fee paid locally (called after returning from Paystack).
+  // pay a fee via Paystack's hosted checkout
   // ---- Fees: now backed by Supabase (fees) ----
   const loadFees=async()=>{
     const {data,error}=await supabase.from("fees").select("*");
     if(error){console.error("loadFees:",error.message);return;}
     setFees((data||[]).map(row=>({id:row.id,studentId:row.student_id,desc:row.description,amount:Number(row.amount),status:row.status,dueDate:row.due_date,paidDate:row.paid_date,method:row.method,receipt:row.receipt})));
   };
-  const markFeePaid=async(feeId,method,ref)=>{
-    const {error}=await supabase.from("fees").update({status:"paid",paid_date:new Date().toISOString().slice(0,10),method,receipt:ref||`RCP-${Date.now().toString().slice(-7)}`}).eq("id",feeId);
-    if(error){alert("Couldn't record the payment: "+error.message);return;}
+  // IMPORTANT: this does NOT mean the payment actually succeeded. Paystack
+  // redirects the browser back regardless of whether the person completed
+  // checkout, closed the tab, or the card was declined — the app has no way
+  // to know from here. So this only records that a payment was *attempted*
+  // (status:"processing"), it never sets status:"paid" directly. Only an
+  // admin confirming they've actually seen the money land (confirmFeePayment,
+  // below) — ideally by checking the real Paystack dashboard — finalizes it.
+  // That's also what makes the referral-commission trigger trustworthy: it
+  // only fires off `fees.status` turning "paid", which now requires a human
+  // to have actually verified the transaction.
+  const markFeeProcessing=async(feeId,method,ref)=>{
+    const {error}=await supabase.from("fees").update({status:"processing",method,receipt:ref||`RCP-${Date.now().toString().slice(-7)}`}).eq("id",feeId);
+    if(error){alert("Couldn't record the payment attempt: "+error.message);return;}
+    await loadFees();
+  };
+  // Admin-only: confirm a "processing" fee actually cleared, after checking
+  // the real Paystack dashboard/bank statement — this is the one moment a
+  // fee actually becomes "paid", and it's what the referral-commission
+  // trigger is waiting on.
+  const confirmFeePayment=async feeId=>{
+    if(!confirm("Confirm this payment actually cleared in Paystack before marking it paid — have you checked?")) return;
+    const {error}=await supabase.from("fees").update({status:"paid",paid_date:new Date().toISOString().slice(0,10)}).eq("id",feeId);
+    if(error){alert("Couldn't confirm the payment: "+error.message);return;}
     await loadFees();
   };
   const createFee=async(studentId,desc,amount,dueDate)=>{
@@ -11906,12 +11938,13 @@ export default function MindKlass(){
     setPayModal(null);
     // Open Paystack secure checkout in a new tab.
     try{ window.open(url,"_blank","noopener"); }catch{}
-    // Optimistic update so the parent sees it reflected immediately. In
-    // production, a Paystack webhook (charge.success) should confirm this
-    // server-side before the receipt is treated as final.
-    markFeePaid(feeId, method||"Paystack", ref);
+    // This only records that a payment was attempted — it moves the fee to
+    // "processing", not "paid". An admin has to confirm it actually cleared
+    // (see confirmFeePayment) before it's treated as final and before any
+    // referral commission is credited on it.
+    markFeeProcessing(feeId, method||"Paystack", ref);
     sync.queueActivity("fee_payment",{feeId,amount:fee.amount,ref,gateway:"paystack"});
-    pushNotify("Payment initiated",`${fee.desc} - $${fee.amount.toFixed(2)} via Paystack. Receipt ${ref}.`,"announcement","parent",false);
+    pushNotify("Payment initiated",`${fee.desc} - $${fee.amount.toFixed(2)} via Paystack. Receipt ${ref}. Awaiting confirmation.`,"announcement","parent",false);
   };
   // push notification (instant alert) - adds to feed for the audience
   // ---- Notifications: now backed by Supabase (notifications) ----
@@ -12124,7 +12157,10 @@ export default function MindKlass(){
 
   if(pg==="game"&&gid) return <GameRunner gid={gid} T={T} onComplete={(g,score)=>sync.queueActivity("game_score",{game:g,score,nick:user?.nick})} onBack={()=>{setGid(null);setPg("dash");setTab("games");}}/>;
 
-  // ── LIVE VIRTUAL CLASSROOM (shared whiteboard for teacher + students) ─────────
+  // ── LIVE VIRTUAL CLASSROOM (presence + attendance check-in; the whiteboard
+  //    below is a personal scratch canvas, NOT yet synced between participants —
+  //    there is no video/audio here either. See audit notes before advertising
+  //    this as a full video-conferencing feature.) ─────────
   if(liveMeeting){
     const cls=classes.find(c=>c.id===liveMeeting.classId);
     const participants=users.filter(u=>(u.role==="teacher"&&u.nick===liveMeeting.host)||(cls&&cls.students.includes(u.id))).slice(0,8);
@@ -12141,8 +12177,8 @@ export default function MindKlass(){
       </div>
       <div style={{flex:1,padding:16,overflowY:"auto"}}>
         <div style={{background:T.card,borderRadius:12,padding:"9px 14px",marginBottom:12,border:`1px solid ${T.border}`,display:"flex",alignItems:"center",gap:8,fontSize:12,color:T.txt}}>
-          <PenLine size={15} color="#1842a8"/><strong style={{color:T.head}}>Shared Whiteboard</strong>
-          <span style={{color:T.muted}}>- {effRole==="teacher"?"Write and explain to your class in real time.":"Follow along and take notes with your teacher."} Works with stylus, finger, or mouse.</span>
+          <PenLine size={15} color="#1842a8"/><strong style={{color:T.head}}>Whiteboard</strong>
+          <span style={{color:T.muted}}>- your own scratch space for this class, not yet synced live with others. Works with stylus, finger, or mouse.</span>
         </div>
         <Whiteboard T={T}/>
       </div>
@@ -12181,6 +12217,23 @@ export default function MindKlass(){
         @keyframes mkLoginFloat0{0%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(26px,-38px) rotate(20deg)}50%{transform:translate(46px,4px) rotate(-14deg)}75%{transform:translate(14px,34px) rotate(10deg)}100%{transform:translate(0,0) rotate(0deg)}}
         @keyframes mkLoginFloat1{0%{transform:translate(0,0) rotate(0deg) scale(1)}33%{transform:translate(-40px,-24px) rotate(-22deg) scale(1.12)}66%{transform:translate(32px,-46px) rotate(16deg) scale(.94)}100%{transform:translate(0,0) rotate(0deg) scale(1)}}
         @keyframes mkLoginFloat2{0%,100%{transform:translate(0,0) rotate(0deg)}20%{transform:translate(34px,30px) rotate(18deg)}45%{transform:translate(-26px,44px) rotate(-16deg)}70%{transform:translate(-38px,-18px) rotate(24deg)}90%{transform:translate(18px,-30px) rotate(-10deg)}}
+        /* Browsers apply their own grey "system" chrome to <select> elements,
+           and Chrome/Safari shade autofilled <input> fields grey/yellow — both
+           override plain inline background styles. These rules force the
+           real theme color (white in light mode, dark in dark mode) to win. */
+        .mk-auth-card input, .mk-auth-card select{
+          background-color:${T.inpBg} !important; color:${T.txt} !important;
+          -webkit-appearance:none; appearance:none;
+        }
+        .mk-auth-card input::placeholder{color:${T.muted};opacity:1;}
+        .mk-auth-card input:-webkit-autofill,
+        .mk-auth-card input:-webkit-autofill:hover,
+        .mk-auth-card input:-webkit-autofill:focus{
+          -webkit-text-fill-color:${T.txt} !important;
+          box-shadow:0 0 0 1000px ${T.inpBg} inset !important;
+          -webkit-box-shadow:0 0 0 1000px ${T.inpBg} inset !important;
+          transition:background-color 9999s ease-in-out 0s;
+        }
       `}</style>
       {LOGIN_FLOAT_ICONS.map((f,i)=><div key={i} style={{position:"absolute",top:`${f.top}%`,left:`${f.left}%`,color:"white",opacity:.22,pointerEvents:"none",filter:"drop-shadow(0 2px 6px rgba(0,0,0,.25))",animation:`mkLoginFloat${f.v} ${f.dur}s ease-in-out ${f.delay}s infinite`}}><f.I size={f.size}/></div>)}
       <button onClick={tog} style={{position:"absolute",top:16,right:16,background:"rgba(255,255,255,.1)",border:"1px solid rgba(255,255,255,.2)",color:"white",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontSize:12,display:"flex",alignItems:"center",gap:5}}>{dark?<Sun size={12}/>:<Moon size={12}/>}{dark?"Light":"Dark"}</button>
@@ -12190,7 +12243,7 @@ export default function MindKlass(){
           <div><span style={{fontWeight:900,fontSize:28,fontFamily:"Outfit,sans-serif",color:"white"}}>MIND</span><span style={{fontWeight:900,fontSize:28,fontFamily:"Outfit,sans-serif",color:"#93c5fd"}}>KLASS</span></div>
           <p style={{color:"rgba(255,255,255,.45)",fontSize:10,letterSpacing:3,textTransform:"uppercase",margin:"3px 0 0"}}>Live Ideally</p>
         </div>
-        <div style={{background:T.card,borderRadius:22,padding:vw<480?18:26,boxShadow:"0 20px 60px rgba(0,0,0,.3)",border:dark?`1px solid ${T.border}`:"none"}}>
+        <div className="mk-auth-card" style={{background:T.card,borderRadius:22,padding:vw<480?18:26,boxShadow:"0 20px 60px rgba(0,0,0,.3)",border:dark?`1px solid ${T.border}`:"none"}}>
           <div style={{display:"flex",gap:5,background:T.alt,borderRadius:12,padding:4,marginBottom:16}}>{tabBtn("in","Sign In")}{tabBtn("up","Create Account")}</div>
           {su.ref&&authMode==="in"&&<div style={{background:dark?"rgba(5,150,105,.15)":"#f0fdf4",border:`1px solid ${dark?"rgba(5,150,105,.4)":"#86efac"}`,borderRadius:9,padding:"8px 12px",marginBottom:14,fontSize:11,color:dark?"#4ade80":"#059669",display:"flex",gap:6,alignItems:"center"}}><Share2 size={12}/>Referral code <strong>{su.ref}</strong> ready - already have an account? Sign in below, or switch to Create Account to use it.</div>}
           {err&&<div style={{background:dark?"rgba(220,38,38,.15)":"#fef2f2",border:`1px solid ${dark?"rgba(220,38,38,.4)":"#fecaca"}`,borderRadius:9,padding:"9px 13px",marginBottom:12,color:dark?"#f87171":"#dc2626",fontSize:12,fontWeight:600,display:"flex",gap:6,alignItems:"center"}}><AlertTriangle size={13}/>{err}</div>}
@@ -12483,7 +12536,15 @@ export default function MindKlass(){
       </div>
       <div style={card}>
         <h3 style={{fontSize:13,fontWeight:800,color:T.head,margin:"0 0 9px",display:"flex",alignItems:"center",gap:5}}><Trophy size={13} color="#d97706"/>Leaderboard</h3>
-        {[{name:"StarMath9",xp:1240,role:"student"},{name:"ChemPro10",xp:890,role:"student"},{name:"BioGenius9",xp:650,role:"student"}].map((p,i)=>(<div key={i} style={{display:"flex",alignItems:"center",gap:9,padding:"7px 10px",borderRadius:8,background:i===0?"#fef9c3":T.alt,marginBottom:4}}><div style={{width:22,height:22,borderRadius:"50%",background:i===0?"#d97706":i===1?"#9ca3af":"#b45309",display:"flex",alignItems:"center",justifyContent:"center"}}><Award size={11} color="white"/></div><Avatar name={p.name} role={p.role} size={26} photo={users.find(u=>(u.nick||u.name)===p.name)?.photo}/><span style={{flex:1,fontWeight:700,color:T.txt,fontSize:12}}>{p.name}</span><span style={{fontWeight:800,color:"#d97706",fontSize:12,display:"flex",alignItems:"center",gap:2}}><Star size={10}/>{p.xp}</span></div>))}
+        {(()=>{
+          // Real students ranked by their actual XP — no invented names. XP
+          // isn't currently awarded by anything in the app yet, so this will
+          // legitimately be empty until that's built; showing that honestly
+          // beats a permanent fake top-3 that real students can never beat.
+          const top=users.filter(u=>u.role==="student"&&u.xp>0).sort((a,b)=>b.xp-a.xp).slice(0,3);
+          if(!top.length) return <p style={{fontSize:12,color:T.muted,margin:0}}>No scores yet — play a game to be the first on the board!</p>;
+          return top.map((p,i)=>(<div key={p.id} style={{display:"flex",alignItems:"center",gap:9,padding:"7px 10px",borderRadius:8,background:i===0?"#fef9c3":T.alt,marginBottom:4}}><div style={{width:22,height:22,borderRadius:"50%",background:i===0?"#d97706":i===1?"#9ca3af":"#b45309",display:"flex",alignItems:"center",justifyContent:"center"}}><Award size={11} color="white"/></div><Avatar name={p.nick||p.name} role={p.role} size={26} photo={p.photo}/><span style={{flex:1,fontWeight:700,color:T.txt,fontSize:12}}>{p.nick||p.name}</span><span style={{fontWeight:800,color:"#d97706",fontSize:12,display:"flex",alignItems:"center",gap:2}}><Star size={10}/>{p.xp}</span></div>));
+        })()}
       </div>
     </>});
   }
@@ -14052,7 +14113,22 @@ export default function MindKlass(){
       {isPar&&totalDue>0&&<div style={{...card,marginBottom:13,background:"linear-gradient(135deg,#fef3c7,#fffbeb)",border:"1px solid #fde68a"}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}}><div><div style={{fontSize:12,color:"#92400e",fontWeight:700}}>Total Outstanding</div><div style={{fontSize:26,fontWeight:900,color:"#d97706",fontFamily:"Outfit,sans-serif"}}>{fmtMoney(totalDue,user?.currency)}</div></div><AlertTriangle size={28} color="#d97706"/></div></div>}
       {targetIds.map(sid=>{const stu=users.find(u=>u.id===sid);const sfees=visFees.filter(f=>f.studentId===sid);if(!sfees.length) return null;return <div key={sid} style={{...card,marginBottom:11}}>
         <div style={{fontSize:13,fontWeight:800,color:"#1842a8",marginBottom:10,display:"flex",alignItems:"center",gap:8}}><Avatar name={stu?.nick} role="student" size={28} photo={stu?.photo}/>{stu?.nick} <span style={{fontSize:10,color:T.muted,fontWeight:600}}>({stu?.name})</span></div>
-        <div style={{display:"flex",flexDirection:"column",gap:8}}>{sfees.map(f=>(<div key={f.id} style={{display:"flex",alignItems:"center",gap:10,padding:"11px 13px",borderRadius:10,background:T.alt,flexWrap:"wrap"}}><div style={{width:36,height:36,borderRadius:9,background:f.status==="paid"?"#dcfce7":"#fef3c7",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{f.status==="paid"?<Receipt size={16} color="#059669"/>:<CreditCard size={16} color="#d97706"/>}</div><div style={{flex:1,minWidth:120}}><div style={{fontSize:13,fontWeight:700,color:T.head}}>{f.desc}</div><div style={{fontSize:10,color:T.muted}}>Due {f.dueDate}{f.paidDate?` - Paid ${f.paidDate} (${f.method})`:""}</div></div><div style={{fontSize:16,fontWeight:900,color:"#0d1f4b",fontFamily:"Outfit,sans-serif"}}>{fmtMoney(f.amount,user?.currency)}</div>{f.status==="paid"?<span style={{padding:"4px 11px",borderRadius:99,background:"#dcfce7",color:"#059669",fontSize:10,fontWeight:700,display:"flex",alignItems:"center",gap:4}}><CheckCircle size={11}/>Paid</span>:isPar?<button onClick={()=>setPayModal(f.id)} style={{...bP,fontSize:11,padding:"7px 14px",background:"linear-gradient(135deg,#059669,#16a34a)"}}><CreditCard size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Pay Now</button>:<span style={{padding:"4px 11px",borderRadius:99,background:"#fef3c7",color:"#d97706",fontSize:10,fontWeight:700}}>Due</span>}{f.receipt&&<button onClick={()=>alert(`Receipt ${f.receipt}\n${f.desc}\nAmount: ${fmtMoney(f.amount,user?.currency)}\nPaid: ${f.paidDate} via ${f.method}\n\nMindKlass - Live Ideally`)} style={{...bO,fontSize:10,padding:"5px 10px"}}><Receipt size={10} style={{marginRight:3,verticalAlign:"middle"}}/>Receipt</button>}</div>))}</div>
+        <div style={{display:"flex",flexDirection:"column",gap:8}}>{sfees.map(f=>{
+          const paid=f.status==="paid", processing=f.status==="processing";
+          const iconBg=paid?"#dcfce7":processing?"#dbeafe":"#fef3c7";
+          return <div key={f.id} style={{display:"flex",alignItems:"center",gap:10,padding:"11px 13px",borderRadius:10,background:T.alt,flexWrap:"wrap"}}>
+            <div style={{width:36,height:36,borderRadius:9,background:iconBg,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{paid?<Receipt size={16} color="#059669"/>:processing?<Hourglass size={16} color="#2563eb"/>:<CreditCard size={16} color="#d97706"/>}</div>
+            <div style={{flex:1,minWidth:120}}><div style={{fontSize:13,fontWeight:700,color:T.head}}>{f.desc}</div><div style={{fontSize:10,color:T.muted}}>Due {f.dueDate}{paid&&f.paidDate?` - Paid ${f.paidDate} (${f.method})`:processing?" - Payment submitted, awaiting confirmation":""}</div></div>
+            <div style={{fontSize:16,fontWeight:900,color:"#0d1f4b",fontFamily:"Outfit,sans-serif"}}>{fmtMoney(f.amount,user?.currency)}</div>
+            {paid?<span style={{padding:"4px 11px",borderRadius:99,background:"#dcfce7",color:"#059669",fontSize:10,fontWeight:700,display:"flex",alignItems:"center",gap:4}}><CheckCircle size={11}/>Paid</span>
+              :processing?(effRole==="admin"
+                ?<button onClick={()=>confirmFeePayment(f.id)} style={{...bP,fontSize:11,padding:"7px 14px",background:"linear-gradient(135deg,#2563eb,#1842a8)"}}><CheckCircle size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Confirm Payment</button>
+                :<span style={{padding:"4px 11px",borderRadius:99,background:"#dbeafe",color:"#2563eb",fontSize:10,fontWeight:700,display:"flex",alignItems:"center",gap:4}}><Hourglass size={11}/>Awaiting confirmation</span>)
+              :isPar?<button onClick={()=>setPayModal(f.id)} style={{...bP,fontSize:11,padding:"7px 14px",background:"linear-gradient(135deg,#059669,#16a34a)"}}><CreditCard size={12} style={{marginRight:4,verticalAlign:"middle"}}/>Pay Now</button>
+                :<span style={{padding:"4px 11px",borderRadius:99,background:"#fef3c7",color:"#d97706",fontSize:10,fontWeight:700}}>Due</span>}
+            {paid&&f.receipt&&<button onClick={()=>alert(`Receipt ${f.receipt}\n${f.desc}\nAmount: ${fmtMoney(f.amount,user?.currency)}\nPaid: ${f.paidDate} via ${f.method}\n\nMindKlass - Live Ideally`)} style={{...bO,fontSize:10,padding:"5px 10px"}}><Receipt size={10} style={{marginRight:3,verticalAlign:"middle"}}/>Receipt</button>}
+          </div>;
+        })}</div>
       </div>;})}
     </>});
   }
